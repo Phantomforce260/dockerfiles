@@ -1,0 +1,27 @@
+services:
+  samba:
+    image: dperson/samba
+    container_name: samba
+    restart: unless-stopped
+    network_mode: host
+
+    command: >
+      -w WORKGROUP
+      -g "map to guest = bad user"
+      -u "adrian;${ADRI_PW}"
+      -u "javi;${JAVI_PW}"
+      -s "adri;/data/adri;yes;no;no;adrian"
+      -s "javi;/data/javi;yes;no;no;javi"
+      -s "shared;/data/shared;yes;no;no;adrian,javi"
+      -s "minecraft;/data/minecraft;yes;no;no;adrian"
+      -s "seagate;/data/seagate;yes;no;no;adrian"
+
+    volumes:
+      # Internal shares (local to docker-compose.yml directory)
+      - ./adri:/data/adri:z
+      - ./javi:/data/javi:z
+      - ./shared:/data/shared:z
+
+      # External drives (mounted in-place)
+      - /media/adrian/mcbe:/data/minecraft:z
+      - /media/adrian/psx:/data/seagate:z
