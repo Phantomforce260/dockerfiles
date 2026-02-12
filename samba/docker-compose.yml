@@ -5,6 +5,14 @@ services:
     restart: unless-stopped
     network_mode: host
 
+    environment:
+      - USERID=1000
+      - GROUPID=1000
+
+    ports:
+      - "139:139"
+      - "445:445"
+
     command: >
       -w WORKGROUP
       -g "map to guest = bad user"
