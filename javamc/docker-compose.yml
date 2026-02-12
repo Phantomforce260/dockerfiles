@@ -1,26 +1,23 @@
 services:
-  mc:
-    image: itzg/minecraft-server:latest
-    tty: true
-    stdin_open: true
-    ports:
-      - "25565:25565"
+    mc:
+        image: itzg/minecraft-server:latest
+        tty: true
+        stdin_open: true
+        ports:
+            - "25565:25565"
+        volumes:
+            - "./data:/data"
+            - "./backups:/backups"
+        environment:
+            EULA: "TRUE"
+            MEMORY: "4096M"
+            DIFFICULTY: "3"
+            ENABLE_WHITELIST: "true"
+            LEVEL: "Bedrock_level_v2"
 
-    volumes:
-      - "./data:/data"
-      - "./backups:/backups"
+            ENABLE_AUTOPAUSE: "FALSE"
+            BACKUP_INTERVAL: "24h"
+            BACKUP_RETENTION: "7"
+            BACKUP_METHOD: "tar"
 
-    environment:
-      EULA: "TRUE"
-      MEMORY: "4096M"
-      DIFFICULTY: "3"
-      ENABLE_WHITELIST: "true"
-      LEVEL: "Bedrock_level_v2"
-
-      ENABLE_AUTOPAUSE: "FALSE"
-      BACKUP_INTERVAL: "24h"
-      BACKUP_RETENTION: "7"
-      BACKUP_METHOD: "tar"
-
-    restart: unless-stopped
-
+        restart: unless-stopped
