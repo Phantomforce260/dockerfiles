@@ -1,4 +1,5 @@
 *.env
+
 gitea/gitea
 gitea/data
 gitea/mysql
@@ -10,3 +11,6 @@ javamc/backups
 samba/adri
 samba/shared
 samba/javi
+
+llama/models
+llama/Project*
