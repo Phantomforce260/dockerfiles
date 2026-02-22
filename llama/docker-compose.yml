@@ -1,32 +1,44 @@
-
 x-llama-common: &llama-common
-  image: ghcr.io/ggml-org/llama.cpp:server
-  restart: unless-stopped
-  volumes:
-    - ./models:/models
-  command: >
-    --model ${MODEL_PATH}
-    --host 0.0.0.0
-    --port 8000
-    --ctx-size ${CTX_SIZE}
-    --threads ${THREADS}
-    --n-gpu-layers ${GPU_LAYERS}
-    --mlock
-  deploy:
-    resources:
-      limits:
-        memory: 28g
-  healthcheck:
-    test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-    interval: 30s
-    timeout: 10s
-    retries: 3
+    image: ghcr.io/ggml-org/llama.cpp:server
+    restart: unless-stopped
+    volumes:
+        - ./models:/models
+    deploy:
+        resources:
+            limits:
+                memory: 28g
 
 services:
-  llama:
-    <<: *llama-common
-    container_name: llama-server
-    ports:
-      - "${PORT}:8000"
-    deploy:
-      replicas: ${REPLICAS}
+    llama:
+        <<: *llama-common
+        container_name: llama-server
+        command: >
+            --model /models/${TEXT_MODEL}
+            --host 0.0.0.0
+            --port ${TEXT_PORT}
+            --ctx-size ${CTX_SIZE}
+            --threads ${THREADS}
+            --n-gpu-layers ${GPU_LAYERS}
+            --mlock
+        ports:
+            - "${TEXT_PORT}:8000"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:${TEXT_PORT}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        deploy:
+            replicas: ${REPLICAS}
+
+    embeddings:
+        <<: *llama-common
+        container_name: llama-embeddings
+        command: >
+            --model /models/${EMBED_MODEL}
+            --host 0.0.0.0
+            --port ${EMBED_PORT}
+            --embedding
+            --ctx-size 512
+            --threads ${THREADS}
+        ports:
+            - "${EMBED_PORT}:8001"
