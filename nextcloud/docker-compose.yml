@@ -1,3 +1,7 @@
+networks:
+    web:
+        external: true
+
 services:
     db:
         image: mariadb:10.11
@@ -11,11 +15,15 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
             - db_data:/var/lib/mysql
+        networks:
+            - web
 
     nextcloud:
         image: nextcloud:latest
         container_name: nextcloud
         restart: unless-stopped
+        networks:
+            - web
         group_add:
             - 1001
         ports:

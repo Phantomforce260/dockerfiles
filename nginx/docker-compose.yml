@@ -1,15 +1,19 @@
-services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
-    networks:
-      - web
-    restart: unless-stopped
-
 networks:
-  web:
-    external: true
+    web:
+        external: true
+
+services:
+    app:
+        image: 'jc21/nginx-proxy-manager:latest'
+        restart: unless-stopped
+        environment:
+            TZ: "America/New_York"
+        ports:
+            - '80:80'
+            - '81:81'
+            - '443:443'
+        volumes:
+            - ./data:/data
+            - ./letsencrypt:/etc/letsencrypt
+        networks:
+            - web

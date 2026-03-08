@@ -1,4 +1,6 @@
 networks:
+    web:
+        external: true
     gitea:
         external: false
 
@@ -22,6 +24,7 @@ services:
         restart: always
         networks:
             - gitea
+            - web
         volumes:
             - ./gitea:/data
             - /etc/timezone:/etc/timezone:ro
