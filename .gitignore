@@ -14,3 +14,7 @@ samba/javi
 
 llama/models
 llama/Project*
+
+nginx/data
+nginx/letsencrypt
+nginx/nginx
