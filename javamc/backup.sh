@@ -14,7 +14,7 @@ FIND=/usr/bin/find
 SLEEP=/bin/sleep
 
 # === CONFIGURATION ===
-CONTAINER_NAME="javamc-mc-1"
+CONTAINER_NAME="javamc"
 SERVER_DIR="/home/adrian/javamc"
 WORLD_NAME="Bedrock_level_v2"
 BACKUP_DIR="$SERVER_DIR/backups"

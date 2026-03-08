@@ -5,6 +5,7 @@ networks:
 services:
     app:
         image: 'jc21/nginx-proxy-manager:latest'
+        container_name: nginx-pm
         restart: unless-stopped
         environment:
             TZ: "America/New_York"
