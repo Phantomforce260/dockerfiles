@@ -18,3 +18,5 @@ llama/Project*
 nginx/data
 nginx/letsencrypt
 nginx/nginx
+
+privatebin/data

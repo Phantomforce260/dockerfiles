@@ -1,0 +1,10 @@
+services:
+    privatebin:
+        image: privatebin/nginx-fpm-alpine
+        restart: always
+        read_only: true
+        user: "1000:1000"
+        ports: 
+            - "8082:8080"
+        volumes:
+            - ./data:/srv/data
