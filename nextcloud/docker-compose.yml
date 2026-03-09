@@ -21,9 +21,11 @@ services:
     nextcloud:
         image: nextcloud:latest
         container_name: nextcloud
+        hostname: nextcloud
         restart: unless-stopped
         networks:
-            - web
+            web:
+                ipv4_address: 172.22.0.5
         group_add:
             - 1001
         ports:
@@ -35,8 +37,18 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
-            NEXTCLOUD_TRUSTED_DOMAINS: "drive.lunarflame.dev 192.168.1.10"
+            NEXTCLOUD_TRUSTED_DOMAINS: "drive.lunarflame.dev 192.168.1.10 nextcloud localhost"
             NEXTCLOUD_PROXY: "true"
+            PHP_OPCACHE_MEMORY_CONSUMPTION: 256
+            PHP_OPCACHE_MAX_ACCELERATED_FILES: 100000
+            PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+            PHP_OPCACHE_REVALIDATE_FREQ: 60
+            PHP_UPLOAD_LIMIT: 100G
+            NEXTCLOUD_UPLOAD_LIMIT: 100G
+            APACHE_BODY_LIMIT: 0
+            PHP_MEMORY_LIMIT: 512M
+            PHP_POST_MAX_SIZE: 100G
+            PHP_MAX_EXECUTION_TIME: 3600
         volumes:
             # Nextcloud internal data/config
             - nextcloud_data:/var/www/html
@@ -44,6 +56,29 @@ services:
             # Samba-backed data (host mounts)
             - /home/adrian/samba:/mnt/samba:rw
             - /media/adrian:/mnt/media:rw
+
+    collabora:
+        image: collabora/code
+        container_name: collabora
+        hostname: collabora
+        restart: unless-stopped
+        cap_add:
+            - MKNOD
+        environment:
+            - username=${CB_USER}
+            - password=${CB_PASSWD}
+            - domain=drive\.lunarflame\.dev
+            - server_name=office.lunarflame.dev
+            - aliasgroup1=https://drive\.lunarflame\.dev:443
+            - extra_params=--o:ssl.enable=false --o:ssl.termination=true
+        ports:
+            - "9980:9980"
+        networks:
+            web:
+                ipv4_address: 172.22.0.6
+        extra_hosts:
+            # This should always be NPM
+            - "drive.lunarflame.dev:172.22.0.3"
 
 volumes:
     db_data:
