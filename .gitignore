@@ -10,15 +10,19 @@ gitea/config
 javamc/data
 javamc/backups
 
-samba/adri
-samba/shared
-samba/javi
-
 llama/models
 llama/Project*
+
+nextcloud/data
+nextcloud/mariadb
 
 nginx/data
 nginx/letsencrypt
 nginx/nginx
 
 microbin/data
+
+samba/adri
+samba/shared
+samba/javi
+

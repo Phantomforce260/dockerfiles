@@ -14,7 +14,7 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
-            - db_data:/var/lib/mysql
+            - ./mariadb:/var/lib/mysql
         networks:
             - web
 
@@ -28,7 +28,7 @@ services:
         group_add:
             - 1001
         ports:
-            - "80"
+            - "8080:80"
         depends_on:
             - db
         environment:
@@ -50,10 +50,10 @@ services:
             PHP_MAX_EXECUTION_TIME: 3600
         volumes:
             # Nextcloud internal data/config
-            - nextcloud_data:/var/www/html
+            - ./data:/var/www/html
 
             # Samba-backed data (host mounts)
-            - /home/adrian/samba:/mnt/samba:rw
+            - /home/adrian/dockerfiles/samba:/mnt/samba:rw
             - /media/adrian:/mnt/media:rw
 
     collabora:

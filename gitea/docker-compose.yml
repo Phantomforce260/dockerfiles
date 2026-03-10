@@ -47,7 +47,7 @@ services:
         networks:
             - gitea
         volumes:
-            - gitea-mysql:/var/lib/mysql
+            - ./mysql:/var/lib/mysql
 
 volumes:
     gitea-mysql:
