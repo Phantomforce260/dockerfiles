@@ -1,4 +1,6 @@
 *.env
+*.tar
+*.tar.gz
 
 gitea/gitea
 gitea/data

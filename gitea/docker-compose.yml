@@ -23,15 +23,14 @@ services:
             - GITEA__service__REQUIRE_SIGNIN_VIEW=true
         restart: always
         networks:
-            gitea:
-            web:
-                ipv4_address: 172.22.0.4
+            - gitea
+            - web
         volumes:
             - ./gitea:/data
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
         ports:
-            - "3000:3000"
+            - "3000"
             - "2222:2222"
         depends_on:
             - db

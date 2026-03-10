@@ -10,12 +10,14 @@ services:
         environment:
             TZ: "America/New_York"
         ports:
-            - '80:80'
-            - '81:81'
-            - '443:443'
+            - "80:80"
+            - "81"
+            - "443:443"
         volumes:
             - ./data:/data
             - ./letsencrypt:/etc/letsencrypt
         networks:
             web:
-                ipv4_address: 172.22.0.3
+                aliases:
+                    - drive.lunarflame.dev
+                    - office.lunarflame.dev
