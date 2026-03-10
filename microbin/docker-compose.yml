@@ -1,0 +1,16 @@
+services:
+    microbin:
+        image: danielszabo99/microbin:latest
+        container_name: microbin
+        restart: unless-stopped
+        ports:
+            - "8082:8080"
+        volumes:
+            - ./data:/app/pasta_data
+        environment:
+            MICROBIN_PUBLIC_PATH: /
+            MICROBIN_DATA_DIR: /app/pasta_data
+            MICROBIN_AUTHENTICATION: "true"
+            MICROBIN_ENABLE_LOGIN: "true"
+            MICROBIN_ADMIN_USERNAME: ${ADMIN_USER}
+            MICROBIN_ADMIN_PASSWORD: ${ADMIN_PASSWD}

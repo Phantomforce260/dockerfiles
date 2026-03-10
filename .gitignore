@@ -19,4 +19,4 @@ nginx/data
 nginx/letsencrypt
 nginx/nginx
 
-privatebin/data
+microbin/data
