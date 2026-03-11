@@ -9,7 +9,11 @@ services:
         restart: unless-stopped
         environment:
             DOMAIN: "https://vault.lunarflame.dev"
+            ADMIN_TOKEN: ${ADMIN_TOKEN}
+            SIGNUPS_ALLOWED: false
         volumes:
             - ./data/:/data/
         ports:
-            - "8080:80"
+            - "80"
+        networks:
+            - web

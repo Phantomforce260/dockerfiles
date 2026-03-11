@@ -28,7 +28,7 @@ services:
         group_add:
             - 1001
         ports:
-            - "8080:80"
+            - "80"
         depends_on:
             - db
         environment:
