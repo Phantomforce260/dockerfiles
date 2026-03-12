@@ -28,3 +28,5 @@ samba/javi
 
 vaultwarden/data
 vaultwarden/master.txt
+
+wireguard/etc_wireguard
