@@ -3,9 +3,7 @@
 *.tar.gz
 
 gitea/gitea
-gitea/data
 gitea/mysql
-gitea/config
 
 javamc/data
 javamc/backups
@@ -30,3 +28,5 @@ vaultwarden/data
 vaultwarden/master.txt
 
 wireguard/etc_wireguard
+wireguard/adguard_work
+wireguard/adguard_conf

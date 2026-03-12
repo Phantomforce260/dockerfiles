@@ -11,6 +11,8 @@ services:
         environment:
             - USER_UID=1000
             - USER_GID=1000
+            - GITEA__packages__ENABLED=true
+            - GITEA__packages__container__ENABLED=true
             - GITEA__database__DB_TYPE=mysql
             - GITEA__database__HOST=db:3306
             - GITEA__database__NAME=${GITEA_DB_NAME}
@@ -48,6 +50,3 @@ services:
             - gitea
         volumes:
             - ./mysql:/var/lib/mysql
-
-volumes:
-    gitea-mysql:
