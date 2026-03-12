@@ -39,14 +39,34 @@ services:
             - net.ipv6.conf.all.forwarding=1
             - net.ipv6.conf.default.forwarding=1
 
-    wg-easy-init:
-        image: alpine
-        container_name: wg-easy-init
+    wg-init:
+        image: signalwire/alpine-iptables
+        container_name: wg-init
         depends_on:
             - wg-easy
         network_mode: "service:wg-easy"
         cap_add:
             - NET_ADMIN
         command: >
-            sh -c "sleep 3 && iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth1 -j MASQUERADE"
+            sh -c "
+                sleep 5 && 
+                iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth1 -j MASQUERADE
+            "
         restart: "no"
+
+    adguard:
+        image: adguard/adguardhome:latest
+        container_name: adguard
+        networks:
+            wg:
+                ipv4_address: 10.42.42.43
+            web:
+        volumes:
+            - ./adguard_work:/opt/adguardhome/work
+            - ./adguard_conf:/opt/adguardhome/conf
+        ports:
+            # Setup Wizard
+            - "3002:3000"
+
+            - "80"
+        restart: unless-stopped
