@@ -6,7 +6,10 @@ networks:
 
 services:
     server:
-        image: docker.gitea.com/gitea:1.25.2
+        # Use the github image if git.lunarflame.dev is down
+        image: ghcr.io/phantomforce260/apps/gitea:1.25.2
+
+        # image: git.lunarflame.dev/docker/apps/gitea:1.25.2
         container_name: gitea
         environment:
             - USER_UID=1000
@@ -38,7 +41,10 @@ services:
             - db
 
     db:
-        image: mysql@sha256:90544b3775490579867a30988d48f0215fc3b88d78d8d62b2c0d96ee9226a2b7
+        # Use the github image if git.lunarflame.dev is down
+        image: ghcr.io/phantomforce260/base/mysql:8
+
+        # image: git.lunarflame.dev/docker/base/mysql:8
         container_name: gitea-db
         restart: always
         environment:

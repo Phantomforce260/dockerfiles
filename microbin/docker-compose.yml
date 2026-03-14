@@ -4,7 +4,7 @@ networks:
 
 services:
     microbin:
-        image: danielszabo99/microbin:latest
+        image: git.lunarflame.dev/docker/apps/microbin:latest
         container_name: microbin
         restart: unless-stopped
         ports:

@@ -4,7 +4,7 @@ networks:
 
 services:
     db:
-        image: mariadb:10.11
+        image: git.lunarflame.dev/docker/base/mariadb:10.11
         container_name: nextcloud-db
         restart: unless-stopped
         command: --transaction-isolation=READ-COMMITTED
@@ -19,7 +19,7 @@ services:
             - web
 
     nextcloud:
-        image: nextcloud:latest
+        image: git.lunarflame.dev/docker/apps/nextcloud:latest
         container_name: nextcloud
         hostname: nextcloud
         restart: unless-stopped
@@ -57,7 +57,7 @@ services:
             - /media/adrian:/mnt/media:rw
 
     collabora:
-        image: collabora/code
+        image: git.lunarflame.dev/docker/apps/collabora/code:latest
         container_name: collabora
         hostname: collabora
         restart: unless-stopped

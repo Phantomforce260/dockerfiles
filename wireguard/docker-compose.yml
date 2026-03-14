@@ -14,9 +14,9 @@ volumes:
     etc_wireguard:
 
 services:
-    wg-easy:
-        image: ghcr.io/wg-easy/wg-easy:15
-        container_name: wg-easy
+    wireguard:
+        image: git.lunarflame.dev/docker/apps/wireguard:latest
+        container_name: wireguard
         networks:
             wg:
                 ipv4_address: 10.42.42.42
@@ -40,11 +40,11 @@ services:
             - net.ipv6.conf.default.forwarding=1
 
     wg-init:
-        image: signalwire/alpine-iptables
+        image: git.lunarflame.dev/docker/linux/alpine/iptables:latest
         container_name: wg-init
         depends_on:
-            - wg-easy
-        network_mode: "service:wg-easy"
+            - wireguard
+        network_mode: "service:wireguard"
         cap_add:
             - NET_ADMIN
         command: >
@@ -55,7 +55,7 @@ services:
         restart: "no"
 
     adguard:
-        image: adguard/adguardhome:latest
+        image: git.lunarflame.dev/docker/apps/adguard:latest
         container_name: adguard
         networks:
             wg:

@@ -1,5 +1,5 @@
 x-llama-common: &llama-common
-    image: ghcr.io/ggml-org/llama.cpp:server
+    image: git.lunarflame.dev/apps/llama.cpp:server
     restart: unless-stopped
     volumes:
         - ./models:/models
