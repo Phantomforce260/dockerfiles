@@ -21,7 +21,7 @@ services:
             --n-gpu-layers ${GPU_LAYERS}
             --mlock
         ports:
-            - "${TEXT_PORT}:8000"
+            - "${TEXT_PORT}:${TEXT_PORT}"
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:${TEXT_PORT}/health"]
             interval: 30s
@@ -41,4 +41,9 @@ services:
             --ctx-size 512
             --threads ${THREADS}
         ports:
-            - "${EMBED_PORT}:8000"
+            - "${EMBED_PORT}:${EMBED_PORT}"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:${EMBED_PORT}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
