@@ -53,7 +53,7 @@ services:
             - ./data:/var/www/html
 
             # Samba-backed data (host mounts)
-            - /home/adrian/dockerfiles/necronomicon/samba:/mnt/samba:rw
+            - ../samba:/mnt/samba:rw
             - /media/adrian:/mnt/media:rw
 
     collabora:

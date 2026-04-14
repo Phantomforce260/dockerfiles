@@ -13,7 +13,7 @@ services:
         <<: *llama-common
         container_name: llama-server
         command: >
-            --model /models/${TEXT_MODEL}
+            --model /models/${TEXT_MODEL}/model.gguf
             --host 0.0.0.0
             --port ${TEXT_PORT}
             --ctx-size ${CTX_SIZE}
@@ -34,11 +34,11 @@ services:
         <<: *llama-common
         container_name: llama-embeddings
         command: >
-            --model /models/${EMBED_MODEL}
+            --model /models/${EMBED_MODEL}/model.gguf
             --host 0.0.0.0
             --port ${EMBED_PORT}
             --embedding
             --ctx-size 512
             --threads ${THREADS}
         ports:
-            - "${EMBED_PORT}:8001"
+            - "${EMBED_PORT}:8000"
