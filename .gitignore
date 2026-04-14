@@ -2,31 +2,31 @@
 *.tar
 *.tar.gz
 
-gitea/gitea
-gitea/mysql
+*/gitea/gitea
+*/gitea/mysql
 
-javamc/data
-javamc/backups
+*/javamc/data
+*/javamc/backups
 
-llama/models
-llama/Project*
+*/llama/models
+*/llama/Project*
 
-nextcloud/data
-nextcloud/mariadb
+*/nextcloud/data
+*/nextcloud/mariadb
 
-nginx/data
-nginx/letsencrypt
-nginx/nginx
+*/nginx/data
+*/nginx/letsencrypt
+*/nginx/nginx
 
-microbin/data
+*/microbin/data
 
-samba/adri
-samba/shared
-samba/javi
+*/samba/adri
+*/samba/shared
+*/samba/javi
 
-vaultwarden/data
-vaultwarden/master.txt
+*/vaultwarden/data
+*/vaultwarden/master.txt
 
-wireguard/etc_wireguard
-wireguard/adguard_work
-wireguard/adguard_conf
+*/wireguard/etc_wireguard
+*/wireguard/adguard_work
+*/wireguard/adguard_conf

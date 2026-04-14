@@ -15,7 +15,7 @@ SLEEP=/bin/sleep
 
 # === CONFIGURATION ===
 CONTAINER_NAME="javamc"
-SERVER_DIR="/home/adrian/dockerfiles/javamc"
+SERVER_DIR="/home/adrian/dockerfiles/necronomicon/javamc"
 WORLD_NAME="Bedrock_level_v2"
 BACKUP_DIR="$SERVER_DIR/backups"
 

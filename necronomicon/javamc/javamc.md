@@ -10,7 +10,7 @@ Select 'vim' as your editor
 
 ```bash
 
-0 4 * * * /home/user/javamc/backup.sh # Or wherever the script is located. Absolute path only.
+0 4 * * * /home/user/dockerfiles/necronomicon/javamc/backup.sh # Or wherever the script is located. Absolute path only.
 
 ```
 
