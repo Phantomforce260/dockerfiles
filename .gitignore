@@ -30,3 +30,6 @@
 */wireguard/etc_wireguard
 */wireguard/adguard_work
 */wireguard/adguard_conf
+
+*/karakeep/data
+*/karakeep/meilisearch

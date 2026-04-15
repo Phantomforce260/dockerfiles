@@ -1,6 +1,8 @@
 networks:
     web:
         external: true
+    backend:
+        driver: bridge
 
 services:
     db:
@@ -16,7 +18,7 @@ services:
         volumes:
             - ./mariadb:/var/lib/mysql
         networks:
-            - web
+            - backend
 
     nextcloud:
         image: git.lunarflame.dev/docker/apps/nextcloud:latest
@@ -25,6 +27,7 @@ services:
         restart: unless-stopped
         networks:
             - web
+            - backend
         group_add:
             - 1001
         ports:
