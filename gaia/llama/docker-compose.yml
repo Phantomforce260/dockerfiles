@@ -1,3 +1,7 @@
+networks:
+    rheia:
+        external: true
+
 x-llama-common: &llama-common
     image: git.lunarflame.dev/docker/apps/llama.cpp:server
     restart: unless-stopped
@@ -29,6 +33,8 @@ services:
             retries: 3
         deploy:
             replicas: ${REPLICAS}
+        networks:
+            - rheia
 
     embeddings:
         <<: *llama-common
@@ -47,3 +53,5 @@ services:
             interval: 30s
             timeout: 10s
             retries: 3
+        networks:
+            - rheia
