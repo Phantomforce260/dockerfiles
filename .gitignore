@@ -37,5 +37,6 @@
 */minio/data
 
 */kyutai/hf_cache
+*/kyutai/voices
 
 */whisper/hf_cache

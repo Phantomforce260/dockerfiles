@@ -4,7 +4,7 @@ networks:
 
 services:
     whisper:
-      build: git.lunarflame.dev/docker/rheia/whisper:latest
+        image: git.lunarflame.dev/docker/rheia/whisper:latest
         container_name: whisper
         networks:
             - rheia

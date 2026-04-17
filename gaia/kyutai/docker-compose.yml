@@ -4,7 +4,7 @@ networks:
 
 services:
     kyutai:
-      build: git.lunarflame.dev/docker/rheia/kyutai:latest
+        image: git.lunarflame.dev/docker/rheia/kyutai:latest
         env_file:
           - .env
         container_name: kyutai
