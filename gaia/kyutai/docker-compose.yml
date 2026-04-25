@@ -11,11 +11,11 @@ services:
         networks:
             - rheia
         ports:
-            - "127.0.0.1:${PORT}:${PORT}"
+            - "127.0.0.1:${KYUTAI_PORT}:${KYUTAI_PORT}"
         restart: unless-stopped
         environment:
             - HOST=0.0.0.0
-            - PORT=${PORT}
+            - PORT=${KYUTAI_PORT}
             - HF_HOME=/cache/huggingface
             - VOICE=${VOICE}
         volumes:
