@@ -1,0 +1,33 @@
+x-llama-common: &llama-common
+    image: git.lunarflame.dev/docker/apps/llama.cpp:server
+    restart: unless-stopped
+    volumes:
+        - ./models:/models
+    deploy:
+        resources:
+            limits:
+                memory: 28g
+
+services:
+    tools:
+        <<: *llama-common
+        container_name: llama-tools
+        command: >
+            --model /models/${TOOL_MODEL}/model.gguf
+            --host 0.0.0.0
+            --port ${TOOL_PORT}
+            --ctx-size 512
+            --threads ${THREADS}
+            --n-gpu-layers ${GPU_LAYERS}
+            --mlock
+        ports:
+            - "${TOOL_PORT}:${TOOL_PORT}"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:${TOOL_PORT}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        deploy:
+            replicas: ${REPLICAS}
+        networks:
+            - rheia
