@@ -14,11 +14,11 @@ services:
             -g "map to guest = bad user"
             -u "adrian;${ADRI_PW}"
             -u "javi;${JAVI_PW}"
-            -s "adri;/data/adri;yes;no;no;adrian"
-            -s "javi;/data/javi;yes;no;no;javi"
-            -s "shared;/data/shared;yes;no;no;adrian,javi"
-            -s "minecraft;/data/minecraft;yes;no;no;adrian"
-            -s "seagate;/data/seagate;yes;no;no;adrian"
+            -s "adri;/data/adri;${MNT_OPT};adrian"
+            -s "javi;/data/javi;${MNT_OPT};javi"
+            -s "shared;/data/shared;${MNT_OPT};adrian,javi"
+            -s "minecraft;/data/minecraft;${MNT_OPT};adrian"
+            -s "psx;/data/psx;${MNT_OPT};adrian"
 
         volumes:
             # Internal shares (local to docker-compose.yml directory)
@@ -28,4 +28,4 @@ services:
 
             # External drives (mounted in-place)
             - /media/adrian/mcbe:/data/minecraft:z
-            - /media/adrian/psx:/data/seagate:z
+            - /media/adrian/psx:/data/psx:z

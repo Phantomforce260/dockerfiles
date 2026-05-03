@@ -39,7 +39,7 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
-            NEXTCLOUD_TRUSTED_DOMAINS: "drive.lunarflame.dev nextcloud"
+            NEXTCLOUD_TRUSTED_DOMAINS: "${DOMAIN} nextcloud"
             NEXTCLOUD_PROXY: "true"
             PHP_OPCACHE_MEMORY_CONSUMPTION: 256
             PHP_OPCACHE_MAX_ACCELERATED_FILES: 100000
@@ -69,9 +69,9 @@ services:
         environment:
             - username=${CB_USER}
             - password=${CB_PASSWD}
-            - domain=drive\.lunarflame\.dev
-            - server_name=office.lunarflame.dev
-            - aliasgroup1=https://drive\.lunarflame\.dev:443
+            - domain=${DOM_FORMATTED}
+            - server_name=${OFFICE_DOMAIN}
+            - aliasgroup1=https://${DOM_FORMATTED}:443
             - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=nextcloud
         ports:
             - "9980"

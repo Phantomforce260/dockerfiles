@@ -21,9 +21,9 @@ services:
             - GITEA__database__NAME=${GITEA_DB_NAME}
             - GITEA__database__USER=${GITEA_DB_USER}
             - GITEA__database__PASSWD=${GITEA_DB_PASSWD}
-            - GITEA__server__ROOT_URL=https://git.lunarflame.dev
-            - GITEA__server__DOMAIN=git.lunarflame.dev
-            - GITEA__server__SSH_DOMAIN=ssh.git.lunarflame.dev
+            - GITEA__server__ROOT_URL=https://${DOMAIN}
+            - GITEA__server__DOMAIN=${DOMAIN}
+            - GITEA__server__SSH_DOMAIN=${SSH_DOMAIN}
             - GITEA__service__DISABLE_REGISTRATION=true
             - GITEA__service__REQUIRE_SIGNIN_VIEW=true
         restart: always
