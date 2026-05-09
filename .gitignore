@@ -27,9 +27,7 @@
 */vaultwarden/data
 */vaultwarden/master.txt
 
-*/wireguard/etc_wireguard
-*/wireguard/adguard_work
-*/wireguard/adguard_conf
+*/pihole/etc-pihole
 
 */karakeep/data
 */karakeep/meilisearch
