@@ -14,7 +14,7 @@ services:
             MINIO_ROOT_USER: ${ROOT_USERNAME}
             MINIO_ROOT_PASSWORD: ${ROOT_PASSWORD}
         volumes:
-            - ~/psx/minio:/data
+            - ~/psx/necronomicon/minio:/data
         command: server /data --console-address ":${CONSOLE_PORT}"
         networks:
             - web

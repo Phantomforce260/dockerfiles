@@ -15,7 +15,7 @@ services:
             - FLARESOLVERR_URL=http://byparr:8191
             - BIND_PORT=${PORT}
         volumes:
-            - ./data:/home/suwayomi/.local/share/Tachidesk
+            - ~/psx/necronomicon/suwayomi:/home/suwayomi/.local/share/Tachidesk
         ports:
             - ${PORT}
         restart: unless-stopped
@@ -29,4 +29,3 @@ services:
         environment:
             - TZ=${TZ}
         restart: unless-stopped
-            

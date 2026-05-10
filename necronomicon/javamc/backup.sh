@@ -17,7 +17,7 @@ SLEEP=/bin/sleep
 CONTAINER_NAME="javamc"
 SERVER_DIR="/home/adrian/dockerfiles/necronomicon/javamc"
 WORLD_NAME="Bedrock_level_v2"
-BACKUP_DIR="$SERVER_DIR/backups"
+BACKUP_DIR="/home/adrian/backupmc/auto"
 
 # === SETUP ===
 TIMESTAMP=$(date +"%Y.%m.%d.%H.%M.%S")
@@ -55,4 +55,3 @@ $ECHO "Removing backups older than 7 days"
 $FIND "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime +7 -print -delete
 
 $ECHO ""
-

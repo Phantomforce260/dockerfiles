@@ -8,7 +8,7 @@ services:
             - "25565:25565"
         volumes:
             - "./data:/data"
-            - "./backups:/backups"
+            - "~/backupmc/auto:/backups"
         environment:
             EULA: "TRUE"
             # Allocate 4 GB of computer memory at most
