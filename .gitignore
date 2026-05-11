@@ -1,15 +1,23 @@
+# Global
 *.env
 *.tar
 *.tar.gz
 
+# Necronomicon
 */gitea/gitea
 */gitea/mysql
 
 */javamc/data
 */javamc/backups
 
-*/llama/models
-*/llama/Project*
+*/karakeep/data
+*/karakeep/meilisearch
+
+*/mcauth/data
+
+*/microbin/data
+
+*/minio/data
 
 */nextcloud/data
 */nextcloud/mariadb
@@ -18,27 +26,24 @@
 */nginx/letsencrypt
 */nginx/nginx
 
-*/microbin/data
+*/pihole/etc-pihole
 
 */samba/adri
-*/samba/shared
 */samba/javi
+*/samba/shared
+
+*/suwayomi/data
 
 */vaultwarden/data
 */vaultwarden/master.txt
 
-*/pihole/etc-pihole
-
-*/karakeep/data
-*/karakeep/meilisearch
-
-*/minio/data
-
-*/suwayomi/data
-
 */wireguard/aconf
 */wireguard/conf
 */wireguard/data
+
+# Gaia
+*/llama/models
+*/llama/Project*
 
 */kyutai/hf_cache
 */kyutai/voices

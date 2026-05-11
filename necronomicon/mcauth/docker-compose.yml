@@ -1,0 +1,16 @@
+networks:
+    web:
+        external: true
+
+services:
+    mcauth:
+        image: git.lunarflame.dev/docker/apps/mcauth:latest
+        container_name: mcauth
+        ports:
+            - "8080"
+        env_file:
+            - .env
+        volumes:
+            - ./data:/app/data
+        networks:
+            web:
