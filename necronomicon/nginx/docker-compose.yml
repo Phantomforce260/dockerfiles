@@ -7,6 +7,7 @@ services:
         # Use the github image if git.lunarflame.dev is down
         image: ghcr.io/phantomforce260/apps/nginx-proxy-manager:latest
 
+        # From jc21/nginx-proxy-manager:latest
         # image: git.lunarflame.dev/docker/apps/nginx-proxy-manager:latest
         container_name: nginx-pm
         restart: unless-stopped

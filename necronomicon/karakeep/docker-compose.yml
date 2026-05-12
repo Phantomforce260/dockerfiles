@@ -6,6 +6,7 @@ networks:
 
 services:
     karakeep:
+        # From ghcr.io/karakeep-app/karakeep:release
         image: git.lunarflame.dev/docker/apps/karakeep:release
         container_name: karakeep
         restart: unless-stopped
@@ -25,6 +26,7 @@ services:
             - backend
 
     chrome:
+        # From gcr.io/zenika-hub/alpine-chrome:124
         image: git.lunarflame.dev/docker/linux/alpine/chrome:124
         container_name: karakeep-chrome
         restart: unless-stopped
@@ -40,6 +42,7 @@ services:
             - backend
 
     meilisearch:
+        # From getmeili/meilisearch:v1.41.0
         image: git.lunarflame.dev/docker/apps/meilisearch:v1.41.0
         container_name: karakeep-search
         restart: unless-stopped

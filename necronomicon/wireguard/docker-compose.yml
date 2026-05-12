@@ -4,21 +4,19 @@ networks:
 
 services:
     wireguard:
+        # From ghcr.io/wgdashboard/wgdashboard:latest
         image: git.lunarflame.dev/docker/apps/wgdashboard:latest
         restart: unless-stopped
         container_name: wireguard 
         networks:
             web:
-
         ports:
             - "10086/tcp"
             - "51820:51820/udp"
-
         volumes:
             - ./aconf:/etc/amnezia/amneziawg
             - ./conf:/etc/wireguard
             - ./data:/data
-
         cap_add:
             - NET_ADMIN
 

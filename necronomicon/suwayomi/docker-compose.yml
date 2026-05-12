@@ -4,6 +4,7 @@ networks:
 
 services:
     suwayomi:
+        # From ghcr.io/suwayomi/suwayomi-server:preview
         image: git.lunarflame.dev/docker/apps/suwayomi/server:preview
         container_name: suwayomi
         environment:
@@ -23,6 +24,7 @@ services:
             - web
 
     byparr:
+        # From ghcr.io/thephaseless/byparr:latest
         image: git.lunarflame.dev/docker/apps/byparr:latest
         container_name: byparr
         init: true

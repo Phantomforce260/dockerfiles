@@ -4,6 +4,7 @@ networks:
 
 services:
     minio:
+        # From minio/minio:latest
         image: git.lunarflame.dev/docker/apps/minio:latest
         container_name: minio
         restart: unless-stopped

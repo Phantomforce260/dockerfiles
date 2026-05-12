@@ -4,6 +4,7 @@ networks:
 
 services:
     pihole:
+        # From pihole/pihole:latest
         image: git.lunarflame.dev/docker/apps/pihole:latest
         container_name: pihole
         restart: unless-stopped
@@ -16,8 +17,6 @@ services:
 
             # HTTP
             - "80/tcp"
-            # HTTPS
-            - "443/tcp"
         environment:
             TZ: 'EST'
             FTLCONF_webserver_api_password: ${ADMIN_PW}

@@ -4,6 +4,7 @@ networks:
 
 services:
     mc:
+        # From itzg/minecraft-server:latest
         image: git.lunarflame.dev/docker/apps/javamc-server:latest
         container_name: javamc
         tty: true
@@ -17,12 +18,9 @@ services:
             mc-server:
         environment:
             EULA: "TRUE"
-            # Allocate 4 GB of computer memory at most
             MEMORY: "4096M"
-            # Difficulty. 3 is "Hard"
-            DIFFICULTY: 3
+            DIFFICULTY: 3 # Hard
             ENABLE_WHITELIST: true
-            # World name
             LEVEL: ${WORLD_NAME}
 
             ENABLE_AUTOPAUSE: "FALSE"
@@ -30,7 +28,6 @@ services:
             BACKUP_RETENTION: "7"
             BACKUP_METHOD: "tar"
 
-            # Enable RCON, a CLI app for entering commands into the server
             ENABLE_RCON: true
             RCON_PASSWORD: ${RCON_PASSWD}
             CREATE_CONSOLE_IN_PIPE: true

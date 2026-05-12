@@ -6,6 +6,7 @@ networks:
 
 services:
     db:
+        # From mariadb:10.11
         image: git.lunarflame.dev/docker/base/mariadb:10.11
         container_name: nextcloud-db
         restart: unless-stopped
@@ -21,6 +22,7 @@ services:
             - backend
 
     nextcloud:
+        # From nextcloud:latest
         image: git.lunarflame.dev/docker/apps/nextcloud:latest
         container_name: nextcloud
         hostname: nextcloud
@@ -60,6 +62,7 @@ services:
             - /media/adrian:/mnt/media:rw
 
     collabora:
+        # From collabora/code:latest
         image: git.lunarflame.dev/docker/apps/collabora/code:latest
         container_name: collabora
         hostname: collabora

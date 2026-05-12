@@ -1,5 +1,6 @@
 services:
     samba:
+        # From dperson/samba:latest
         image: git.lunarflame.dev/docker/apps/samba:latest
         container_name: samba
         restart: unless-stopped
@@ -27,5 +28,5 @@ services:
             - ./shared:/data/shared:z
 
             # External drives (mounted in-place)
-            - /media/adrian/mcbe:/data/minecraft:z
-            - /media/adrian/psx:/data/psx:z
+            - ~/backupmc:/data/minecraft:z
+            - ~/psx:/data/psx:z
