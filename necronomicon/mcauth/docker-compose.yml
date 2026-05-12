@@ -1,6 +1,8 @@
 networks:
     web:
         external: true
+    mc-server:
+        external: true
 
 services:
     mcauth:
@@ -8,9 +10,16 @@ services:
         container_name: mcauth
         ports:
             - "8080"
-        env_file:
-            - .env
+        environment:
+            ADMIN_USERNAME: ${ADMIN_USERNAME}
+            ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+            RCON_HOST: javamc
+            # This must be the password from your existing minecraft RCON session.
+            # Do not make a new password!
+            RCON_PASSWORD: ${RCON_PASSWORD}
+            SERVER_LINK: ${SERVER_LINK}
         volumes:
-            - ./data:/app/data
+            - ../javamc/data:/app/data
         networks:
             web:
+            mc-server:
