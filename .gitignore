@@ -37,6 +37,10 @@
 */vaultwarden/data
 */vaultwarden/master.txt
 
+*/jellyfin/media
+*/jellyfin/config
+*/jellyfin/cache
+
 */wireguard/aconf
 */wireguard/conf
 */wireguard/data

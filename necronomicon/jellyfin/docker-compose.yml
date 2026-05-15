@@ -1,0 +1,25 @@
+networks:
+    web:
+        external: true
+
+services:
+    jellyfin:
+        # From jellyfin/jellyfin:latest
+        image: git.lunarflame.dev/docker/apps/jellyfin:latest
+        container_name: jellyfin
+        ports:
+            # Web UI
+            - "8096/tcp"
+            # Discovery Port for Network Devices
+            - "7359:7359/udp"
+        volumes:
+            - ./config:/config
+            - ./cache:/cache
+            - type: bind
+              source: ~/psx/necronomicon/jellyfin
+              target: /media
+        restart: unless-stopped
+        environment:
+            - JELLYFIN_PublishedServerUrl=https://jellyfin.lunarflame.dev
+        networks:
+            web:
