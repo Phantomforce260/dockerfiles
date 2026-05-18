@@ -4,6 +4,8 @@
 *.tar.gz
 
 # Necronomicon
+*/filebrowser/appdata
+
 */gitea/gitea
 */gitea/mysql
 

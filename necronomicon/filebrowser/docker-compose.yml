@@ -1,0 +1,21 @@
+networks:
+    web:
+        external: true
+
+services:
+    filebrowser:
+        # From filebrowser/filebrowser
+        image: git.lunarflame.dev/docker/apps/filebrowser:latest
+        container_name: filebrowser
+        environment:
+            - PUID=1000
+            - PGID=1000
+        volumes:
+            - ${BROWSER_ROOT}:/srv
+            - ./appdata/filebrowser:/database
+            - ./appdata/filebrowser:/config
+        ports:
+            - "80"
+        restart: unless-stopped
+        networks:
+            web:
