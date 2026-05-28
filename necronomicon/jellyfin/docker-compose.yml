@@ -8,8 +8,6 @@ services:
         image: git.lunarflame.dev/docker/apps/jellyfin:latest
         container_name: jellyfin
         ports:
-            # Web UI
-            - "8096/tcp"
             # Discovery Port for Network Devices
             - "7359:7359/udp"
         volumes:

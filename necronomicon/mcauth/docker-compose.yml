@@ -8,8 +8,6 @@ services:
     mcauth:
         image: git.lunarflame.dev/docker/apps/mcauth:latest
         container_name: mcauth
-        ports:
-            - "8080"
         environment:
             ADMIN_USERNAME: ${ADMIN_USERNAME}
             ADMIN_PASSWORD: ${ADMIN_PASSWORD}

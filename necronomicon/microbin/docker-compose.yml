@@ -8,8 +8,6 @@ services:
         image: git.lunarflame.dev/docker/apps/microbin:latest
         container_name: microbin
         restart: unless-stopped
-        ports:
-            - "8080"
         volumes:
             - ./data:/app/pasta_data
         environment:

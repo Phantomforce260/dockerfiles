@@ -23,6 +23,7 @@
 
 */nextcloud/data
 */nextcloud/mariadb
+*/nextcloud/redis
 
 */nginx/data
 */nginx/letsencrypt

@@ -14,8 +14,6 @@ services:
             - ${BROWSER_ROOT}:/srv
             - ./appdata/filebrowser:/database
             - ./appdata/filebrowser:/config
-        ports:
-            - "80"
         restart: unless-stopped
         networks:
             web:

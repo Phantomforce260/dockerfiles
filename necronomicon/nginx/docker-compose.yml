@@ -15,7 +15,6 @@ services:
             TZ: "America/New_York"
         ports:
             - "80:80"
-            - "81"
             - "443:443"
         volumes:
             - ./data:/data

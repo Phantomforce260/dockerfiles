@@ -5,6 +5,46 @@ networks:
         driver: bridge
 
 services:
+    nextcloud:
+        # From nextcloud:latest
+        # The :mod tag is a custom image that includes ffmpeg for video encoding
+        image: git.lunarflame.dev/docker/apps/nextcloud:mod
+        container_name: nextcloud
+        hostname: nextcloud
+        restart: unless-stopped
+        networks:
+            - web
+            - backend
+        group_add:
+            - 1001
+        depends_on:
+            - db
+            - redis
+        environment:
+            MYSQL_HOST: db
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            NEXTCLOUD_TRUSTED_DOMAINS: "${DOMAIN} nextcloud"
+            NEXTCLOUD_PROXY: "true"
+            PHP_OPCACHE_MEMORY_CONSUMPTION: 256
+            PHP_OPCACHE_MAX_ACCELERATED_FILES: 100000
+            PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+            PHP_OPCACHE_REVALIDATE_FREQ: 60
+            PHP_UPLOAD_LIMIT: 100G
+            NEXTCLOUD_UPLOAD_LIMIT: 100G
+            APACHE_BODY_LIMIT: 0
+            PHP_MEMORY_LIMIT: 1024M
+            PHP_POST_MAX_SIZE: 100G
+            PHP_MAX_EXECUTION_TIME: 3600
+        volumes:
+            # Nextcloud internal data/config
+            - ./data:/var/www/html
+
+            # Samba-backed data (host mounts)
+            - ../samba:/mnt/samba:rw
+            - /media/adrian:/mnt/media:rw
+
     db:
         # From mariadb:10.11
         image: git.lunarflame.dev/docker/base/mariadb:10.11
@@ -21,46 +61,6 @@ services:
         networks:
             - backend
 
-    nextcloud:
-        # From nextcloud:latest
-        image: git.lunarflame.dev/docker/apps/nextcloud:latest
-        container_name: nextcloud
-        hostname: nextcloud
-        restart: unless-stopped
-        networks:
-            - web
-            - backend
-        group_add:
-            - 1001
-        ports:
-            - "80"
-        depends_on:
-            - db
-        environment:
-            MYSQL_HOST: db
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            NEXTCLOUD_TRUSTED_DOMAINS: "${DOMAIN} nextcloud"
-            NEXTCLOUD_PROXY: "true"
-            PHP_OPCACHE_MEMORY_CONSUMPTION: 256
-            PHP_OPCACHE_MAX_ACCELERATED_FILES: 100000
-            PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
-            PHP_OPCACHE_REVALIDATE_FREQ: 60
-            PHP_UPLOAD_LIMIT: 100G
-            NEXTCLOUD_UPLOAD_LIMIT: 100G
-            APACHE_BODY_LIMIT: 0
-            PHP_MEMORY_LIMIT: 512M
-            PHP_POST_MAX_SIZE: 100G
-            PHP_MAX_EXECUTION_TIME: 3600
-        volumes:
-            # Nextcloud internal data/config
-            - ./data:/var/www/html
-
-            # Samba-backed data (host mounts)
-            - ../samba:/mnt/samba:rw
-            - /media/adrian:/mnt/media:rw
-
     collabora:
         # From collabora/code:latest
         image: git.lunarflame.dev/docker/apps/collabora/code:latest
@@ -76,10 +76,21 @@ services:
             - server_name=${OFFICE_DOMAIN}
             - aliasgroup1=https://${DOM_FORMATTED}:443
             - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=nextcloud
-        ports:
-            - "9980"
         networks:
             - web
+
+    redis:
+        # From redis:7-alpine
+        image: git.lunarflame.dev/docker/linux/alpine/redis:7
+        container_name: nextcloud-redis
+        restart: unless-stopped
+
+        command: redis-server --save 60 1 --loglevel warning
+
+        volumes:
+            - ./redis:/data
+        networks:
+            - backend
 
 volumes:
     db_data:
