@@ -3,7 +3,7 @@ networks:
         external: true
 
 services:
-    mc:
+    javamc:
         # From itzg/minecraft-server:latest
         image: git.lunarflame.dev/docker/apps/javamc-server:latest
         container_name: javamc
@@ -13,7 +13,6 @@ services:
             - "25565:25565"
         volumes:
             - "./data:/data"
-            - "${BACKUP_DIR}:/backups"
         networks:
             mc-server:
         environment:
@@ -22,14 +21,32 @@ services:
             DIFFICULTY: 3 # Hard
             ENABLE_WHITELIST: true
             LEVEL: ${WORLD_NAME}
-
-            ENABLE_AUTOPAUSE: "FALSE"
-            BACKUP_INTERVAL: "24h"
-            BACKUP_RETENTION: "7"
-            BACKUP_METHOD: "tar"
-
             ENABLE_RCON: true
             RCON_PASSWORD: ${RCON_PASSWD}
             CREATE_CONSOLE_IN_PIPE: true
 
+        restart: unless-stopped
+
+    backup:
+        # From itzg/mc-backup:latest
+        image: itzg/mc-backup:latest
+        container_name: mc-backup
+        networks:
+            mc-server:
+        depends_on:
+            - javamc
+
+        environment:
+            RCON_HOST: javamc
+            RCON_PORT: 25575
+            RCON_PASSWORD: ${RCON_PASSWD}
+
+            BACKUP_CRON_EXPRESSION: "0 4 * * *"
+            TZ: "America/New_York"
+            BACKUP_METHOD: tar
+            PRUNE_BACKUPS_DAYS: 7
+            INITIAL_DELAY: 2m
+        volumes:
+            - "./data:/data:ro"
+            - "${BACKUP_DIR}:/backups"
         restart: unless-stopped

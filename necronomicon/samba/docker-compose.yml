@@ -1,15 +1,35 @@
 services:
+    samba-init:
+        # From alpine:latest
+        image: git.lunarflame.dev/docker/linux/alpine:latest
+        container_name: samba-init
+        volumes:
+            - ./:/shares
+        command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p \
+                  /shares/adri \
+                  /shares/javi \
+                  /shares/shared &&
+              find /shares -type d -exec chmod 755 {} \; &&
+              find /shares -type f -exec chmod 644 {} \;
+        restart: "no"
+
     samba:
         # From dperson/samba:latest
         image: git.lunarflame.dev/docker/apps/samba:latest
         container_name: samba
         restart: unless-stopped
         network_mode: host
+        depends_on:
+            samba-init:
+                condition: service_completed_successfully
 
         environment:
             - USERID=1000
             - GROUPID=1000
-
         command: >
             -w WORKGROUP
             -g "map to guest = bad user"
@@ -20,7 +40,6 @@ services:
             -s "shared;/data/shared;${MNT_OPT};adrian,javi"
             -s "minecraft;/data/minecraft;${MNT_OPT};adrian"
             -s "psx;/data/psx;${MNT_OPT};adrian"
-
         volumes:
             # Internal shares (local to docker-compose.yml directory)
             - ./adri:/data/adri:z
