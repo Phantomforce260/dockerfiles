@@ -29,8 +29,8 @@ services:
 
     backup:
         # From itzg/mc-backup:latest
-        image: itzg/mc-backup:latest
-        container_name: mc-backup
+        image: git.lunarflame.dev/docker/apps/javamc-server/backup:latest
+        container_name: javamc-backup
         networks:
             mc-server:
         depends_on:
