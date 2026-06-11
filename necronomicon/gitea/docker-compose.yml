@@ -32,7 +32,7 @@ services:
             - gitea
             - web
         volumes:
-            - ./gitea:/data
+            - ~/psx/necronomicon/gitea/data:/data
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
         ports:
@@ -56,4 +56,4 @@ services:
         networks:
             - gitea
         volumes:
-            - ./mysql:/var/lib/mysql
+            - ~/psx/necronomicon/gitea/mysql:/var/lib/mysql

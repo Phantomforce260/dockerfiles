@@ -42,7 +42,7 @@ services:
             - ./data:/var/www/html
 
             # Samba-backed data (host mounts)
-            - ../samba:/mnt/samba:rw
+            - ~/psx/necronomicon/samba:/mnt/samba:rw
             - /media/adrian:/mnt/media:rw
 
     db:
