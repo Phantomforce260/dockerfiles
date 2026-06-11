@@ -3,10 +3,10 @@
 *.tar
 *.tar.gz
 
-# Necronomicon
+# -------------------------------------------------------------------------
 */filebrowser/appdata
 
-*/gitea/gitea
+*/gitea/config
 */gitea/mysql
 
 */javamc/data
@@ -48,7 +48,7 @@
 */wireguard/conf
 */wireguard/data
 
-# Gaia
+# -------------------------------------------------------------------------
 */llama/models
 */llama/Project*
 
