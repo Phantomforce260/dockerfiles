@@ -1,6 +1,4 @@
 networks:
-    web:
-        external: true
     backend:
         driver: bridge
 
@@ -13,13 +11,16 @@ services:
         hostname: nextcloud
         restart: unless-stopped
         networks:
-            - web
             - backend
         group_add:
             - 1001
         depends_on:
             - db
             - redis
+        ports:
+            - "8000:80"
+        dns:
+            - 192.168.1.6
         environment:
             MYSQL_HOST: db
             MYSQL_USER: ${MYSQL_USER}
@@ -43,7 +44,7 @@ services:
 
             # Samba-backed data (host mounts)
             - ~/psx/necronomicon/samba:/mnt/samba:rw
-            - /media/adrian:/mnt/media:rw
+            - /mnt:/mnt:rw
 
     db:
         # From mariadb:10.11
@@ -76,17 +77,15 @@ services:
             - server_name=${OFFICE_DOMAIN}
             - aliasgroup1=https://${DOM_FORMATTED}:443
             - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=nextcloud
-        networks:
-            - web
+        ports:
+            - "8001:9980"
 
     redis:
         # From redis:7-alpine
         image: git.lunarflame.dev/docker/linux/alpine/redis:7
         container_name: nextcloud-redis
         restart: unless-stopped
-
         command: redis-server --save 60 1 --loglevel warning
-
         volumes:
             - ./redis:/data
         networks:

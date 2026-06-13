@@ -1,6 +1,4 @@
 networks:
-    web:
-        external: true
     gitea:
         external: false
 
@@ -18,7 +16,7 @@ services:
             - GITEA__packages__ENABLED=true
             - GITEA__packages__container__ENABLED=true
             - GITEA__database__DB_TYPE=mysql
-            - GITEA__database__HOST=db:3306
+            - GITEA__database__HOST=gitea-db:3306
             - GITEA__database__NAME=${GITEA_DB_NAME}
             - GITEA__database__USER=${GITEA_DB_USER}
             - GITEA__database__PASSWD=${GITEA_DB_PASSWD}
@@ -30,12 +28,12 @@ services:
         restart: always
         networks:
             - gitea
-            - web
         volumes:
-            - ~/psx/necronomicon/gitea/data:/data
+            - ./data:/data
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
         ports:
+            - "3000:3000"
             - "2222:2222"
         depends_on:
             - db
@@ -56,4 +54,4 @@ services:
         networks:
             - gitea
         volumes:
-            - ~/psx/necronomicon/gitea/mysql:/var/lib/mysql
+            - ./mysql:/var/lib/mysql

@@ -1,7 +1,3 @@
-networks:
-    web:
-        external: true
-
 services:
     suwayomi:
         # From ghcr.io/suwayomi/suwayomi-server:preview
@@ -18,8 +14,8 @@ services:
         volumes:
             - ~/psx/necronomicon/suwayomi:/home/suwayomi/.local/share/Tachidesk
         restart: unless-stopped
-        networks:
-            - web
+        ports:
+            - "8005:5000"
 
     byparr:
         # From ghcr.io/thephaseless/byparr:latest
