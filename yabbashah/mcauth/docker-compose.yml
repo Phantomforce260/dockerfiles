@@ -1,6 +1,4 @@
 networks:
-    web:
-        external: true
     mc-server:
         external: true
 
@@ -18,6 +16,7 @@ services:
             SERVER_LINK: ${SERVER_LINK}
         volumes:
             - ../javamc/data:/app/data
+        ports:
+            - "8080:8080"
         networks:
-            web:
-            mc-server:
+            - mc-server

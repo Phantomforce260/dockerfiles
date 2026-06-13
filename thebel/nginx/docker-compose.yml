@@ -5,10 +5,10 @@ networks:
 services:
     app:
         # Use the github image if git.lunarflame.dev is down
-        image: ghcr.io/phantomforce260/apps/nginx-proxy-manager:latest
+        #image: ghcr.io/phantomforce260/apps/nginx-proxy-manager:latest
 
         # From jc21/nginx-proxy-manager:latest
-        # image: git.lunarflame.dev/docker/apps/nginx-proxy-manager:latest
+        image: git.lunarflame.dev/docker/apps/nginx-proxy-manager:latest
         container_name: nginx-pm
         restart: unless-stopped
         environment:
@@ -21,7 +21,4 @@ services:
             - ./data:/data
             - ./letsencrypt:/etc/letsencrypt
         networks:
-            web:
-                aliases:
-                    - drive.lunarflame.dev
-                    - office.lunarflame.dev
+            - web

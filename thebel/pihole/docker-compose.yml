@@ -5,8 +5,7 @@ networks:
 services:
     pihole:
         # From pihole/pihole:latest
-        image: pihole/pihole:latest
-        #image: git.lunarflame.dev/docker/apps/pihole:latest
+        image: git.lunarflame.dev/docker/apps/pihole:latest
         container_name: pihole
         restart: unless-stopped
         networks:

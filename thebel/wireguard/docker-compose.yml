@@ -5,8 +5,7 @@ networks:
 services:
     wireguard:
         # From ghcr.io/wgdashboard/wgdashboard:latest
-        image: ghcr.io/wgdashboard/wgdashboard:latest
-        #image: git.lunarflame.dev/docker/apps/wgdashboard:latest
+        image: git.lunarflame.dev/docker/apps/wgdashboard:latest
         restart: unless-stopped
         container_name: wireguard 
         networks:
