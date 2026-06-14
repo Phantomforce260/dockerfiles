@@ -1,16 +1,11 @@
-networks:
-    web:
-        external: true
-
 services:
     wireguard:
         # From ghcr.io/wgdashboard/wgdashboard:latest
         image: git.lunarflame.dev/docker/apps/wgdashboard:latest
         restart: unless-stopped
         container_name: wireguard 
-        networks:
-            web:
         ports:
+            - "8002:10086"
             - "51820:51820/udp"
         volumes:
             - ./aconf:/etc/amnezia/amneziawg

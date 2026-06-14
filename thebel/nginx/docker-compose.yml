@@ -1,7 +1,3 @@
-networks:
-    web:
-        external: true
-
 services:
     app:
         # Use the github image if git.lunarflame.dev is down
@@ -13,12 +9,12 @@ services:
         restart: unless-stopped
         environment:
             TZ: "America/New_York"
+        dns:
+            - 192.168.1.6
         ports:
             - "80:80"
-            - "81:81"
+            - "8000:81"
             - "443:443"
         volumes:
             - ./data:/data
             - ./letsencrypt:/etc/letsencrypt
-        networks:
-            - web
