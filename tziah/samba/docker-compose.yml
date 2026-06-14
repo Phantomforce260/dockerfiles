@@ -45,7 +45,3 @@ services:
             - ${INTERNAL_DIR}/adri:/data/adri:z
             - ${INTERNAL_DIR}/javi:/data/javi:z
             - ${INTERNAL_DIR}/shared:/data/shared:z
-
-            # External drives (mounted in-place)
-            - ~/backupmc:/data/minecraft:z
-            - ~/psx:/data/psx:z

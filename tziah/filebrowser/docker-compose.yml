@@ -1,7 +1,3 @@
-networks:
-    web:
-        external: true
-
 services:
     filebrowser:
         # From filebrowser/filebrowser
@@ -15,5 +11,3 @@ services:
             - ./appdata/filebrowser:/database
             - ./appdata/filebrowser:/config
         restart: unless-stopped
-        networks:
-            web:
