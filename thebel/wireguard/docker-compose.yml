@@ -8,10 +8,10 @@ services:
 
         ports:
             - "8002:10086"
+            - "51820:51820/udp"
 
         cap_add:
             - NET_ADMIN
-            - "51820:51820/udp"
 
         volumes:
             - ./aconf:/etc/amnezia/amneziawg
