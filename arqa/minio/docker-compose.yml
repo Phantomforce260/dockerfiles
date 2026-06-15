@@ -13,7 +13,7 @@ services:
         environment:
             MINIO_ROOT_USER: ${ROOT_USERNAME}
             MINIO_ROOT_PASSWORD: ${ROOT_PASSWORD}
-        command: server /data --console-address ":${CONSOLE_PORT}"
+        command: server /data --console-address ":9000"
 
         volumes:
             - ~/psx/necronomicon/minio:/data
