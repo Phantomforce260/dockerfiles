@@ -1,24 +1,22 @@
-networks:
-    web:
-        external: true
-
 services:
     minio:
-        # From minio/minio:latest
-        image: git.lunarflame.dev/docker/apps/minio:latest
         container_name: minio
         restart: unless-stopped
+
+        # From minio/minio:latest
+        image: git.lunarflame.dev/docker/apps/minio:latest
+
         ports:
             - "9000:9000" # API
             - "9001:9001" # Console UI
+
         environment:
             MINIO_ROOT_USER: ${ROOT_USERNAME}
             MINIO_ROOT_PASSWORD: ${ROOT_PASSWORD}
+        command: server /data --console-address ":${CONSOLE_PORT}"
+
         volumes:
             - ~/psx/necronomicon/minio:/data
-        command: server /data --console-address ":${CONSOLE_PORT}"
-        networks:
-            - web
 
 volumes:
     data:

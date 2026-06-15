@@ -1,10 +1,11 @@
 services:
     samba-init:
+        container_name: samba-init
+        restart: "no"
+
         # From alpine:latest
         image: git.lunarflame.dev/docker/linux/alpine:latest
-        container_name: samba-init
-        volumes:
-            - ${INTERNAL_DIR}:/shares
+
         command:
             - /bin/sh
             - -c
@@ -15,17 +16,22 @@ services:
                   /shares/shared &&
               find /shares -type d -exec chmod 755 {} \; &&
               find /shares -type f -exec chmod 644 {} \;
-        restart: "no"
+
+        volumes:
+            - ${INTERNAL_DIR}:/shares
+
 
     samba:
-        # From dperson/samba:latest
-        image: git.lunarflame.dev/docker/apps/samba:latest
         container_name: samba
         restart: unless-stopped
-        network_mode: host
         depends_on:
             samba-init:
                 condition: service_completed_successfully
+
+        # From dperson/samba:latest
+        image: git.lunarflame.dev/docker/apps/samba:latest
+
+        network_mode: host
 
         environment:
             - USERID=1000
@@ -40,6 +46,7 @@ services:
             -s "shared;/data/shared;${MNT_OPT};adrian,javi"
             -s "minecraft;/data/minecraft;${MNT_OPT};adrian"
             -s "psx;/data/psx;${MNT_OPT};adrian"
+
         volumes:
             # Internal shares (local to docker-compose.yml directory)
             - ${INTERNAL_DIR}/adri:/data/adri:z

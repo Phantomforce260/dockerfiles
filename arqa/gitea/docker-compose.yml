@@ -4,12 +4,23 @@ networks:
 
 services:
     server:
+        container_name: gitea
+        restart: unless-stopped
+        depends_on:
+            - db
+
         # Use the github image if git.lunarflame.dev is down
-        image: ghcr.io/phantomforce260/apps/gitea:1.25.2
+        #image: ghcr.io/phantomforce260/apps/gitea:1.25.2
 
         # From docker.gitea.com/gitea:1.25.2
-        # image: git.lunarflame.dev/docker/apps/gitea:1.25.2
-        container_name: gitea
+        image: git.lunarflame.dev/docker/apps/gitea:1.25.2
+
+        ports:
+            - "3000:3000"
+            - "2222:2222"
+        networks:
+            - gitea
+
         environment:
             - USER_UID=1000
             - USER_GID=1000
@@ -25,33 +36,30 @@ services:
             - GITEA__server__SSH_DOMAIN=${SSH_DOMAIN}
             - GITEA__service__DISABLE_REGISTRATION=true
             - GITEA__service__REQUIRE_SIGNIN_VIEW=true
-        restart: always
-        networks:
-            - gitea
+
         volumes:
             - ./data:/data
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
-        ports:
-            - "3000:3000"
-            - "2222:2222"
-        depends_on:
-            - db
 
     db:
+        container_name: gitea-db
+        restart: unless-stopped
+
         # Use the github image if git.lunarflame.dev is down
-        image: ghcr.io/phantomforce260/base/mysql:8
+        # image: ghcr.io/phantomforce260/base/mysql:8
 
         # From docker.io/library/mysql:8
-        # image: git.lunarflame.dev/docker/base/mysql:8
-        container_name: gitea-db
-        restart: always
+        image: git.lunarflame.dev/docker/base/mysql:8
+
+        networks:
+            - gitea
+
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_DATABASE=${MYSQL_DATABASE}
-        networks:
-            - gitea
+
         volumes:
             - ./mysql:/var/lib/mysql

@@ -4,18 +4,23 @@ networks:
 
 services:
     whisper:
-        image: git.lunarflame.dev/docker/rheia/whisper:latest
         container_name: whisper
-        networks:
-            - rheia
+        restart: unless-stopped
+
+        image: git.lunarflame.dev/docker/rheia/whisper:latest
+
         ports:
             - "127.0.0.1:${WHISPER_PORT}:${WHISPER_PORT}"
-        restart: unless-stopped
+        networks:
+            - rheia
+
         environment:
             - HOST=0.0.0.0
             - PORT=${WHISPER_PORT}
             - HF_HOME=/cache/huggingface
+
         volumes:
             - ./hf_cache:/cache/huggingface
+
 volumes:
     hf_cache:

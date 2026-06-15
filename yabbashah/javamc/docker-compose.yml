@@ -4,17 +4,17 @@ networks:
 
 services:
     javamc:
+        container_name: javamc
+        restart: unless-stopped
+
         # From itzg/minecraft-server:latest
         image: git.lunarflame.dev/docker/apps/javamc-server:latest
-        container_name: javamc
-        tty: true
-        stdin_open: true
+
         ports:
             - "25565:25565"
-        volumes:
-            - "./data:/data"
         networks:
             mc-server:
+
         environment:
             EULA: "TRUE"
             MEMORY: "4096M"
@@ -24,17 +24,23 @@ services:
             ENABLE_RCON: true
             RCON_PASSWORD: ${RCON_PASSWD}
             CREATE_CONSOLE_IN_PIPE: true
+        tty: true
+        stdin_open: true
 
-        restart: unless-stopped
+        volumes:
+            - ./data:/data
 
     backup:
-        # From itzg/mc-backup:latest
-        image: git.lunarflame.dev/docker/apps/javamc-server/backup:latest
         container_name: javamc-backup
-        networks:
-            mc-server:
+        restart: unless-stopped
         depends_on:
             - javamc
+
+        # From itzg/mc-backup:latest
+        image: git.lunarflame.dev/docker/apps/javamc-server/backup:latest
+
+        networks:
+            mc-server:
 
         environment:
             RCON_HOST: javamc
@@ -46,7 +52,7 @@ services:
             BACKUP_METHOD: tar
             PRUNE_BACKUPS_DAYS: 7
             INITIAL_DELAY: 2m
+
         volumes:
             - "./data:/data:ro"
             - "${BACKUP_DIR}:/backups"
-        restart: unless-stopped

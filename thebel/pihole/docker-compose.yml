@@ -1,21 +1,25 @@
 services:
     pihole:
-        # From pihole/pihole:latest
-        image: git.lunarflame.dev/docker/apps/pihole:latest
         container_name: pihole
         restart: unless-stopped
+
+        # From pihole/pihole:latest
+        image: git.lunarflame.dev/docker/apps/pihole:latest
+
         ports:
             - "8001:80"
             # DNS Ports
             - "53:53/tcp"
             - "53:53/udp"
+
         environment:
             TZ: 'EST'
             FTLCONF_webserver_api_password: ${ADMIN_PW}
             FTLCONF_dns_listeningMode: 'ALL'
-        volumes:
-            - './etc-pihole:/etc/pihole'
         cap_add:
             - NET_ADMIN
             - SYS_TIME
             - SYS_NICE
+
+        volumes:
+            - './etc-pihole:/etc/pihole'

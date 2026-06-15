@@ -1,8 +1,14 @@
 services:
     suwayomi:
+        container_name: suwayomi
+        restart: unless-stopped
+
         # From ghcr.io/suwayomi/suwayomi-server:preview
         image: git.lunarflame.dev/docker/apps/suwayomi/server:preview
-        container_name: suwayomi
+
+        ports:
+            - "8005:5000"
+
         environment:
             - AUTH_MODE=ui_login
             - AUTH_USERNAME=${AUTH_USER}
@@ -13,15 +19,14 @@ services:
             - BIND_PORT=5000
         volumes:
             - ~/psx/necronomicon/suwayomi:/home/suwayomi/.local/share/Tachidesk
-        restart: unless-stopped
-        ports:
-            - "8005:5000"
 
     byparr:
+        container_name: suwayomi-byparr
+        restart: unless-stopped
+
         # From ghcr.io/thephaseless/byparr:latest
         image: git.lunarflame.dev/docker/apps/byparr:latest
-        container_name: suwayomi-byparr
+
         init: true
         environment:
             - TZ=${TZ}
-        restart: unless-stopped

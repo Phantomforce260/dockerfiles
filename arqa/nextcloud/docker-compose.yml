@@ -4,23 +4,24 @@ networks:
 
 services:
     nextcloud:
-        # From nextcloud:latest
-        # The :mod tag is a custom image that includes ffmpeg for video encoding
-        image: git.lunarflame.dev/docker/apps/nextcloud:mod
         container_name: nextcloud
         hostname: nextcloud
         restart: unless-stopped
-        networks:
-            - backend
-        group_add:
-            - 1001
         depends_on:
             - db
             - redis
+
+        # From nextcloud:latest
+        # The :mod tag is a custom image that includes ffmpeg for video encoding
+        image: git.lunarflame.dev/docker/apps/nextcloud:mod
+
         ports:
             - "8000:80"
         dns:
             - 192.168.1.6
+        networks:
+            - backend
+
         environment:
             MYSQL_HOST: db
             MYSQL_USER: ${MYSQL_USER}
@@ -38,6 +39,9 @@ services:
             PHP_MEMORY_LIMIT: 1024M
             PHP_POST_MAX_SIZE: 100G
             PHP_MAX_EXECUTION_TIME: 3600
+        group_add:
+            - 1001
+
         volumes:
             # Nextcloud internal data/config
             - ./data:/var/www/html
@@ -47,29 +51,36 @@ services:
             - /mnt:/mnt:rw
 
     db:
-        # From mariadb:10.11
-        image: git.lunarflame.dev/docker/base/mariadb:10.11
         container_name: nextcloud-db
         restart: unless-stopped
-        command: --transaction-isolation=READ-COMMITTED
+
+        # From mariadb:10.11
+        image: git.lunarflame.dev/docker/base/mariadb:10.11
+
+        networks:
+            - backend
+
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
+        command: --transaction-isolation=READ-COMMITTED
+
         volumes:
             - ./mariadb:/var/lib/mysql
-        networks:
-            - backend
 
     collabora:
-        # From collabora/code:latest
-        image: git.lunarflame.dev/docker/apps/collabora/code:latest
         container_name: collabora
         hostname: collabora
         restart: unless-stopped
-        cap_add:
-            - MKNOD
+
+        # From collabora/code:latest
+        image: git.lunarflame.dev/docker/apps/collabora/code:latest
+
+        ports:
+            - "8001:9980"
+
         environment:
             - username=${CB_USER}
             - password=${CB_PASSWD}
@@ -77,19 +88,23 @@ services:
             - server_name=${OFFICE_DOMAIN}
             - aliasgroup1=https://${DOM_FORMATTED}:443
             - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=nextcloud
-        ports:
-            - "8001:9980"
+        cap_add:
+            - MKNOD
 
     redis:
-        # From redis:7-alpine
-        image: git.lunarflame.dev/docker/linux/alpine/redis:7
         container_name: nextcloud-redis
         restart: unless-stopped
-        command: redis-server --save 60 1 --loglevel warning
-        volumes:
-            - ./redis:/data
+
+        # From redis:7-alpine
+        image: git.lunarflame.dev/docker/linux/alpine/redis:7
+
         networks:
             - backend
+
+        command: redis-server --save 60 1 --loglevel warning
+
+        volumes:
+            - ./redis:/data
 
 volumes:
     db_data:

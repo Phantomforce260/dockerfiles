@@ -4,29 +4,38 @@ networks:
 
 services:
     karakeep:
-        # From ghcr.io/karakeep-app/karakeep:release
-        image: git.lunarflame.dev/docker/apps/karakeep:release
         container_name: karakeep
         restart: unless-stopped
-        volumes:
-            - ./data:/data
-        env_file:
-            - .env
+
+        # From ghcr.io/karakeep-app/karakeep:release
+        image: git.lunarflame.dev/docker/apps/karakeep:release
+
         ports:
             - "8002:3000"
+        networks:
+            - backend
+
         environment:
             MEILI_ADDR: http://meilisearch:7700
             BROWSER_WEB_URL: http://chrome:9222
             DISABLE_SIGNUPS: true
             DATA_DIR: /data
+        env_file:
+            - .env
+
+        volumes:
+            - ./data:/data
+
+    chrome:
+        container_name: karakeep-chrome
+        restart: unless-stopped
+
+        # From gcr.io/zenika-hub/alpine-chrome:124
+        image: git.lunarflame.dev/docker/linux/alpine/chrome:124
+
         networks:
             - backend
 
-    chrome:
-        # From gcr.io/zenika-hub/alpine-chrome:124
-        image: git.lunarflame.dev/docker/linux/alpine/chrome:124
-        container_name: karakeep-chrome
-        restart: unless-stopped
         command:
             - --no-sandbox
             - --disable-gpu
@@ -35,22 +44,24 @@ services:
             - --remote-debugging-port=9222
             - --hide-scrollbars
             - --disable-features=UseDBus
+
+    meilisearch:
+        container_name: karakeep-search
+        restart: unless-stopped
+
+        # From getmeili/meilisearch:v1.41.0
+        image: git.lunarflame.dev/docker/apps/meilisearch:v1.41.0
+
         networks:
             - backend
 
-    meilisearch:
-        # From getmeili/meilisearch:v1.41.0
-        image: git.lunarflame.dev/docker/apps/meilisearch:v1.41.0
-        container_name: karakeep-search
-        restart: unless-stopped
-        env_file:
-            - .env
         environment:
             MEILI_NO_ANALYTICS: "true"
+        env_file:
+            - .env
+
         volumes:
             - ./meilisearch:/meili_data
-        networks:
-            - backend
 
 volumes:
     meilisearch:

@@ -1,20 +1,24 @@
 services:
-    app:
+    npm:
+        container_name: nginx-pm
+        restart: unless-stopped
+
         # Use the github image if git.lunarflame.dev is down
         #image: ghcr.io/phantomforce260/apps/nginx-proxy-manager:latest
 
         # From jc21/nginx-proxy-manager:latest
         image: git.lunarflame.dev/docker/apps/nginx-proxy-manager:latest
-        container_name: nginx-pm
-        restart: unless-stopped
-        environment:
-            TZ: "America/New_York"
+
         dns:
             - 192.168.1.6
         ports:
             - "80:80"
             - "8000:81"
             - "443:443"
+
+        environment:
+            TZ: "America/New_York"
+
         volumes:
             - ./data:/data
             - ./letsencrypt:/etc/letsencrypt

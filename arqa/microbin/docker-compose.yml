@@ -1,13 +1,14 @@
 services:
     microbin:
-        # From danielszabo99/microbin:latest
-        image: git.lunarflame.dev/docker/apps/microbin:latest
         container_name: microbin
         restart: unless-stopped
-        volumes:
-            - ./data:/app/pasta_data
+
+        # From danielszabo99/microbin:latest
+        image: git.lunarflame.dev/docker/apps/microbin:latest
+
         ports:
             - "8004:8080"
+
         environment:
             MICROBIN_PUBLIC_PATH: /
             MICROBIN_DATA_DIR: /app/pasta_data
@@ -15,3 +16,6 @@ services:
             MICROBIN_ENABLE_LOGIN: "true"
             MICROBIN_ADMIN_USERNAME: ${ADMIN_USER}
             MICROBIN_ADMIN_PASSWORD: ${ADMIN_PASSWD}
+
+        volumes:
+            - ./data:/app/pasta_data

@@ -4,8 +4,15 @@ networks:
 
 services:
     mcauth:
-        image: git.lunarflame.dev/docker/apps/mcauth:latest
         container_name: mcauth
+
+        image: git.lunarflame.dev/docker/apps/mcauth:latest
+
+        ports:
+            - "8080:8080"
+        networks:
+            - mc-server
+
         environment:
             ADMIN_USERNAME: ${ADMIN_USERNAME}
             ADMIN_PASSWORD: ${ADMIN_PASSWORD}
@@ -14,9 +21,6 @@ services:
             # Do not make a new password!
             RCON_PASSWORD: ${RCON_PASSWORD}
             SERVER_LINK: ${SERVER_LINK}
+
         volumes:
             - ../javamc/data:/app/data
-        ports:
-            - "8080:8080"
-        networks:
-            - mc-server

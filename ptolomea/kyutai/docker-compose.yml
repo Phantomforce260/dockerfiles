@@ -4,20 +4,24 @@ networks:
 
 services:
     kyutai:
-        image: git.lunarflame.dev/docker/rheia/kyutai:latest
-        env_file:
-          - .env
         container_name: kyutai
-        networks:
-            - rheia
+        restart: unless-stopped
+
+        image: git.lunarflame.dev/docker/rheia/kyutai:latest
+
         ports:
             - "127.0.0.1:${KYUTAI_PORT}:${KYUTAI_PORT}"
-        restart: unless-stopped
+        networks:
+            - rheia
+
         environment:
             - HOST=0.0.0.0
             - PORT=${KYUTAI_PORT}
             - HF_HOME=/cache/huggingface
             - VOICE=${VOICE}
+        env_file:
+          - .env
+
         volumes:
             - ./hf_cache:/cache/huggingface
             - ./voices:/app/voices

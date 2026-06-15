@@ -1,18 +1,22 @@
 services:
     wireguard:
+        container_name: wireguard 
+        restart: unless-stopped
+
         # From ghcr.io/wgdashboard/wgdashboard:latest
         image: git.lunarflame.dev/docker/apps/wgdashboard:latest
-        restart: unless-stopped
-        container_name: wireguard 
+
         ports:
             - "8002:10086"
+
+        cap_add:
+            - NET_ADMIN
             - "51820:51820/udp"
+
         volumes:
             - ./aconf:/etc/amnezia/amneziawg
             - ./conf:/etc/wireguard
             - ./data:/data
-        cap_add:
-            - NET_ADMIN
 
 volumes:
     aconf:
