@@ -4,7 +4,7 @@ services:
         restart: unless-stopped
 
         # From ghcr.io/suwayomi/suwayomi-server:preview
-        image: git.lunarflame.dev/docker/apps/suwayomi/server:preview
+        image: git.lunarflame.dev/docker/apps/suwayomi/server:latest
 
         ports:
             - "8005:5000"
@@ -17,6 +17,7 @@ services:
             - FLARESOLVERR_ENABLED=true
             - FLARESOLVERR_URL=http://suwayomi-byparr:8191
             - BIND_PORT=5000
+            - JAVA_TOOL_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED
         volumes:
             - ~/psx/necronomicon/suwayomi:/home/suwayomi/.local/share/Tachidesk
 
