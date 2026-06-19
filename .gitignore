@@ -4,6 +4,7 @@
 *.tar.gz
 
 # -------------------------------------------------------------------------
+
 */filebrowser/appdata
 
 */gitea/data
@@ -47,6 +48,10 @@
 */wireguard/aconf
 */wireguard/conf
 */wireguard/data
+
+*/lazydocker/config
+
+*/portainer/server/data
 
 # -------------------------------------------------------------------------
 */llama/models
