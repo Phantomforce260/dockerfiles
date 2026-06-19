@@ -7,7 +7,7 @@ services:
         image: git.lunarflame.dev/docker/apps/pihole:latest
 
         ports:
-            - "8001:80"
+            - "8003:80"
             # DNS Ports
             - "53:53/tcp"
             - "53:53/udp"

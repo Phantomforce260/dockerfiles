@@ -7,7 +7,7 @@ services:
         security_opt:
             - no-new-privileges:true
         ports:
-            - "8003:9443"
+            - "8001:9000"
             - "8000:8000"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro

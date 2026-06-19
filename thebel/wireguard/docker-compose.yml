@@ -7,7 +7,7 @@ services:
         image: git.lunarflame.dev/docker/apps/wgdashboard:latest
 
         ports:
-            - "8002:10086"
+            - "8004:10086"
             - "51820:51820/udp"
 
         cap_add:
