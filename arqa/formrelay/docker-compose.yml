@@ -4,6 +4,6 @@ services:
         container_name: formrelay
         restart: unless-stopped
         ports:
-          - "3000:3000"
+          - "8007:3000"
         volumes:
           - ./data:/app/data
