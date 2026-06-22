@@ -1,17 +1,29 @@
 services:
+    filebrowser-init:
+        # From alpine:latest
+        image: git.lunarflame.dev/docker/linux/alpine:latest
+        user: root
+        command: >
+            sh -c "
+              mkdir -p /data/filebrowser &&
+              chown -R 1000:1000 /data
+            "
+        volumes:
+            - ./appdata:/data
+        restart: "no"
+
     filebrowser:
         container_name: filebrowser
         restart: unless-stopped
+        depends_on:
+            filebrowser-init:
+                condition: service_completed_successfully
 
         # From filebrowser/filebrowser
         image: git.lunarflame.dev/docker/apps/filebrowser:latest
 
         ports:
             - "8099:80"
-
-        environment:
-            - PUID=1000
-            - PGID=1000
 
         volumes:
             - ${BROWSER_ROOT}:/srv
