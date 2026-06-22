@@ -1,22 +1,33 @@
-# Global
+# GLOBAL ------------------------------------------------------------------
 *.env
 *.tar
 *.tar.gz
 
-# -------------------------------------------------------------------------
+# THEBEL ------------------------------------------------------------------
+
+*/nginx/data
+*/nginx/letsencrypt
+*/nginx/nginx
+
+*/pihole/etc-pihole
+
+*/wireguard/aconf
+*/wireguard/conf
+*/wireguard/data
+
+*/portainer/server/data
+
+# ARQA --------------------------------------------------------------------
 
 */filebrowser/appdata
+
+*/formrelay/data
 
 */gitea/data
 */gitea/mysql
 
-*/javamc/data
-*/javamc/backups
-
 */karakeep/data
 */karakeep/meilisearch
-
-*/mcauth/data
 
 */microbin/data
 
@@ -25,16 +36,6 @@
 */nextcloud/data
 */nextcloud/mariadb
 */nextcloud/redis
-
-*/nginx/data
-*/nginx/letsencrypt
-*/nginx/nginx
-
-*/pihole/etc-pihole
-
-*/samba/adri
-*/samba/javi
-*/samba/shared
 
 */suwayomi/data
 
@@ -45,17 +46,23 @@
 */jellyfin/config
 */jellyfin/cache
 
-*/wireguard/aconf
-*/wireguard/conf
-*/wireguard/data
+# YABBASHAH ---------------------------------------------------------------
+
+*/javamc/data
+*/javamc/backups
+
+*/mcauth/data
+
+# TZIAH -------------------------------------------------------------------
 
 */lazydocker/config
 
-*/portainer/server/data
+*/samba/adri
+*/samba/javi
+*/samba/shared
 
-*/formrelay/data
+# PTOLOMEA ----------------------------------------------------------------
 
-# -------------------------------------------------------------------------
 */llama/models
 */llama/Project*
 
