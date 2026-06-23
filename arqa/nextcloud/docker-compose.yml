@@ -78,6 +78,8 @@ services:
         # From collabora/code:latest
         image: git.lunarflame.dev/docker/apps/collabora/code:latest
 
+        dns:
+            - 192.168.1.6
         ports:
             - "8001:9980"
 
@@ -87,7 +89,7 @@ services:
             - domain=${DOM_FORMATTED}
             - server_name=${OFFICE_DOMAIN}
             - aliasgroup1=https://${DOM_FORMATTED}:443
-            - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=nextcloud
+            - extra_params=--o:ssl.enable=false --o:ssl.termination=true --o:storage.wopi.host[0]=office\.lunarflame\.dev
         cap_add:
             - MKNOD
 
