@@ -54,5 +54,5 @@ services:
             INITIAL_DELAY: 2m
 
         volumes:
-            - "./data:/data:ro"
-            - "${BACKUP_DIR}:/backups"
+            - ./data:/data:ro
+            - ${BACKUP_DIR}:/backups

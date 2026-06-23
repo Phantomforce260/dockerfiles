@@ -17,8 +17,3 @@ services:
             - ./aconf:/etc/amnezia/amneziawg
             - ./conf:/etc/wireguard
             - ./data:/data
-
-volumes:
-    aconf:
-    conf:
-    data:

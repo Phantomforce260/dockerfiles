@@ -4,7 +4,7 @@ services:
         image: git.lunarflame.dev/docker/apps/excalidraw:latest
         container_name: excalidraw
         ports:
-            - 8008:80 # web-ui for drawing
+            - 8008:80
         restart: unless-stopped
         entrypoint: /bin/sh
         command:
@@ -29,7 +29,7 @@ services:
         image: git.lunarflame.dev/docker/apps/excalidraw/room:latest
         container_name: excalidraw-room
         ports:
-            - 8009:80 # web-socket for collaboration
+            - 8009:80
         restart: unless-stopped
         healthcheck:
             test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:80/ >/dev/null 2>&1 || exit 1"]

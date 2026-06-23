@@ -17,6 +17,3 @@ services:
 
         volumes:
             - ~/psx/necronomicon/minio:/data
-
-volumes:
-    data:
