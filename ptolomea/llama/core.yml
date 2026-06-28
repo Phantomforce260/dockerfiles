@@ -3,7 +3,8 @@ networks:
         external: true
 
 x-llama-common: &llama-common
-    image: ghcr.io/ggml-org/llama.cpp:server-cuda13
+    # From ghcr.io/ggml-org/llama.cpp:server-cuda13
+    image: git.lunarflame.dev/docker/apps/llama.cpp:server-cuda13
     restart: unless-stopped
     volumes:
         - ./models:/models
