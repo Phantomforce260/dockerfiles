@@ -29,7 +29,7 @@ services:
             --port ${TOOL_PORT}
             --ctx-size 512
             --threads ${THREADS}
-            --n-gpu-layers ${GPU_LAYERS}
+            --n-gpu-layers 0
             --mlock
 
         healthcheck:
