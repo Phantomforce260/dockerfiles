@@ -1,0 +1,89 @@
+networks:
+    rheia:
+        external: true
+
+services:
+    controller:
+        # From ghcr.io/ggml-org/llama.cpp:server
+        image: git.lunarflame.dev/docker/apps/llama.cpp:server
+        container_name: llama-controller
+        restart: unless-stopped
+        volumes:
+            - ~/Models:/models
+
+        deploy:
+            replicas: ${REPLICAS}
+
+        ports:
+            - "${CONTROLLER_PORT}:${CONTROLLER_PORT}"
+        networks:
+            - rheia
+
+        command: >
+            --model /models/${CONTROLLER_MODEL}/model.gguf
+            --host 0.0.0.0
+            --port ${CONTROLLER_PORT}
+            --ctx-size ${CONTROLLER_CTX_SIZE}
+            --threads ${THREADS}
+            --n-gpu-layers 0
+            --mlock
+
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:${CONTROLLER_PORT}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    converse:
+        # From ghcr.io/ggml-org/llama.cpp:server-cuda13
+        image: git.lunarflame.dev/docker/apps/llama.cpp:server-cuda13
+        restart: unless-stopped
+        volumes:
+            - ~/Models:/models
+        container_name: llama-converse
+        runtime: nvidia
+        environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+            - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+        ports:
+            - "${CONVERSE_PORT}:${CONVERSE_PORT}"
+        deploy:
+            replicas: ${REPLICAS}
+            resources:
+                limits:
+                    memory: 28g
+        networks:
+            - rheia
+
+        command: >
+            --model /models/${CONVERSE_MODEL}/model.gguf
+            --host 0.0.0.0
+            --port ${CONVERSE_PORT}
+            --ctx-size ${CONVERSE_CTX_SIZE}
+            --threads ${THREADS}
+            --n-gpu-layers ${GPU_LAYERS}
+            --mlock
+
+    embeddings:
+        # From ghcr.io/ggml-org/llama.cpp:server
+        image: git.lunarflame.dev/docker/apps/llama.cpp:server
+        restart: unless-stopped
+        volumes:
+            - ~/Models:/models
+        container_name: llama-embeddings
+        deploy:
+            replicas: ${REPLICAS}
+
+        ports:
+            - "${EMBED_PORT}:${EMBED_PORT}"
+        networks:
+            - rheia
+
+        command: >
+            --model /models/${EMBED_MODEL}/model.gguf
+            --host 0.0.0.0
+            --port ${EMBED_PORT}
+            --embedding
+            --ctx-size ${EMBEDDING_CTX_SIZE}
+            --threads ${THREADS}
