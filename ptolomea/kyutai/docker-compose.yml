@@ -10,13 +10,13 @@ services:
         image: git.lunarflame.dev/docker/rheia/kyutai:latest
 
         ports:
-            - "${KYUTAI_PORT}:${KYUTAI_PORT}"
+            - "${PORT}:${PORT}"
         networks:
             - rheia
 
         environment:
             - HOST=0.0.0.0
-            - PORT=${KYUTAI_PORT}
+            - PORT=${PORT}
             - HF_HOME=/cache/huggingface
             - VOICE=${VOICE}
         env_file:
