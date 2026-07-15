@@ -3,8 +3,12 @@ services:
         container_name: suwayomi
         restart: unless-stopped
 
-        # From ghcr.io/suwayomi/suwayomi-server:preview
+        # From ghcr.io/suwayomi/suwayomi-server:latest
         image: git.lunarflame.dev/docker/apps/suwayomi/server:latest
+        deploy:
+            resources:
+                limits:
+                    memory: 384M
 
         ports:
             - "8005:5000"
@@ -19,7 +23,7 @@ services:
             - BIND_PORT=5000
             - JAVA_TOOL_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED
         volumes:
-            - ~/psx/necronomicon/suwayomi:/home/suwayomi/.local/share/Tachidesk
+            - ${DATA_DIR}:/home/suwayomi/.local/share/Tachidesk
 
     byparr:
         container_name: suwayomi-byparr
@@ -27,6 +31,10 @@ services:
 
         # From ghcr.io/thephaseless/byparr:latest
         image: git.lunarflame.dev/docker/apps/byparr:latest
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
 
         init: true
         environment:

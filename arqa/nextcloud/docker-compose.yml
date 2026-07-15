@@ -47,8 +47,8 @@ services:
             - ./data:/var/www/html
 
             # Samba-backed data (host mounts)
-            - ~/psx/necronomicon/samba:/mnt/samba:rw
-            - /mnt:/mnt:rw
+            - ${SAMBA_DIR}:/mnt/smb:rw
+            - /mnt/psx:/mnt/psx:rw
 
     db:
         container_name: nextcloud-db
