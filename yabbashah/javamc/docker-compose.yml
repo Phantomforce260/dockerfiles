@@ -17,8 +17,8 @@ services:
 
         environment:
             EULA: "TRUE"
-            MEMORY: "4096M"
-            DIFFICULTY: 3 # Hard
+            MEMORY: ${MEMORY}
+            DIFFICULTY: ${DIFF}
             ENABLE_WHITELIST: true
             LEVEL: ${WORLD_NAME}
             ENABLE_RCON: true

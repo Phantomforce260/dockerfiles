@@ -3,6 +3,7 @@ services:
         container_name: playit
 
         image: ghcr.io/playit-cloud/playit-agent:0.16
+        restart: unless-stopped
 
         network_mode: host
 
