@@ -18,12 +18,15 @@ services:
             - "8002:3000"
         networks:
             - backend
+        dns:
+            - 192.168.1.6
 
         environment:
             MEILI_ADDR: http://meilisearch:7700
             BROWSER_WEB_URL: http://chrome:9222
             DISABLE_SIGNUPS: true
             DATA_DIR: /data
+            CRAWLER_ALLOWED_INTERNAL_HOSTNAMES: .lunarflame.dev
         env_file:
             - .env
 
@@ -39,6 +42,8 @@ services:
 
         networks:
             - backend
+        dns:
+            - 192.168.1.6
 
         command:
             - --no-sandbox
@@ -58,6 +63,8 @@ services:
 
         networks:
             - backend
+        dns:
+            - 192.168.1.6
 
         environment:
             MEILI_NO_ANALYTICS: "true"
