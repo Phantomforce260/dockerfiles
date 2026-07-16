@@ -4,7 +4,7 @@ services:
         restart: unless-stopped
 
         # From pihole/pihole:latest
-        image: git.lunarflame.dev/docker/apps/pihole:latest
+        image: ${LF_GIT}/apps/pihole:latest
 
         ports:
             - "8003:80"
@@ -22,4 +22,4 @@ services:
             - SYS_NICE
 
         volumes:
-            - './etc-pihole:/etc/pihole'
+            - ./etc-pihole:/etc/pihole

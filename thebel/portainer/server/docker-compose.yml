@@ -1,7 +1,7 @@
 services:
     portainer:
         # From portainer/portainer-ce:lts
-        image: git.lunarflame.dev/docker/apps/portainer/ce:lts
+        image: ${LF_GIT}/apps/portainer/ce:lts
         container_name: portainer
         restart: unless-stopped
         security_opt:

@@ -1,8 +1,8 @@
 services:
     agent:
         # From portainer/agent:lts
-        image: git.lunarflame.dev/docker/apps/portainer/agent:lts
-        container_name: portainer_agent
+        image: ${LF_GIT}/apps/portainer/agent:lts
+        container_name: portainer-agent
         restart: unless-stopped
         ports:
             - "9002:9001"
