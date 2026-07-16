@@ -5,7 +5,7 @@ networks:
 services:
     controller:
         # From ghcr.io/ggml-org/llama.cpp:server
-        image: git.lunarflame.dev/docker/apps/llama.cpp:server
+        image: ${LF_GIT}/apps/llama.cpp:server
         container_name: llama-controller
         restart: unless-stopped
 

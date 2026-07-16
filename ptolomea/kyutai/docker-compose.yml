@@ -7,7 +7,7 @@ services:
         container_name: kyutai
         restart: unless-stopped
 
-        image: git.lunarflame.dev/docker/rheia/kyutai:latest
+        image: ${LF_GIT}/rheia/kyutai:latest
 
         ports:
             - "${PORT}:${PORT}"

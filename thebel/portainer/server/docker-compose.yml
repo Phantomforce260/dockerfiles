@@ -9,8 +9,8 @@ services:
         dns:
             - ${DNS_SERVER}
         ports:
-            - "8001:9000"
-            - "8000:8000"
+            - 8001:9000
+            - 8000:8000
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
             - ./data:/data

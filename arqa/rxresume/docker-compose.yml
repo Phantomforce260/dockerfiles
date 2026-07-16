@@ -1,4 +1,28 @@
 services:
+    reactive-resume:
+        # From amruthpillai/reactive-resume:latest
+        image: ${LF_GIT}/apps/rxresume:latest
+        container_name: rxresume
+        restart: unless-stopped
+        depends_on:
+            postgres:
+                condition: service_healthy
+        dns:
+            - ${DNS_SERVER}
+
+        ports:
+            - 8013:3000
+        env_file:
+            - .env
+        volumes:
+            # Used when S3 is not configured; keeps uploads persistent
+            - ./data:/app/data
+        healthcheck:
+            test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8013/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
     postgres:
         # From postgres:latest
         image: ${LF_GIT}/base/postgres:latest
@@ -15,27 +39,3 @@ services:
             interval: 10s
             timeout: 5s
             retries: 10
-
-    reactive-resume:
-        # From amruthpillai/reactive-resume:latest
-        image: git.lunarflame.dev/docker/apps/rxresume:latest
-        container_name: rxresume
-        restart: unless-stopped
-        depends_on:
-            postgres:
-                condition: service_healthy
-        dns:
-            - ${DNS_SERVER}
-
-        ports:
-            - "8013:3000"
-        env_file:
-            - .env
-        volumes:
-            # Used when S3 is not configured; keeps uploads persistent
-            - ./data:/app/data
-        healthcheck:
-            test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8013/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));"]
-            interval: 30s
-            timeout: 10s
-            retries: 3

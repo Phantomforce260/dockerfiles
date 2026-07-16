@@ -8,10 +8,10 @@ services:
         restart: unless-stopped
 
         # From itzg/minecraft-server:latest
-        image: git.lunarflame.dev/docker/apps/javamc-server:latest
+        image: ${LF_GIT}/apps/javamc-server:latest
 
         ports:
-            - "25565:25565"
+            - 25565:25565
         networks:
             mc-server:
 
@@ -37,7 +37,7 @@ services:
             - javamc
 
         # From itzg/mc-backup:latest
-        image: git.lunarflame.dev/docker/apps/javamc-server/backup:latest
+        image: ${LF_GIT}/apps/javamc-server/backup:latest
 
         networks:
             mc-server:

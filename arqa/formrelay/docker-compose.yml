@@ -1,9 +1,9 @@
 services:
     formrelay:
-        image: git.lunarflame.dev/docker/apps/formrelay:latest
+        image: ${LF_GIT}/apps/formrelay:latest
         container_name: formrelay
         restart: unless-stopped
         ports:
-          - "8007:3000"
+          - 8007:3000
         volumes:
           - ./data:/app/data

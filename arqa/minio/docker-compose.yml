@@ -7,8 +7,8 @@ services:
         image: ${LF_GIT}/apps/minio:latest
 
         ports:
-            - "8012:9000" # API
-            - "8011:9001" # Console UI
+            - 8012:9000 # API
+            - 8011:9001 # Console UI
 
         environment:
             MINIO_ROOT_USER: ${ROOT_USERNAME}

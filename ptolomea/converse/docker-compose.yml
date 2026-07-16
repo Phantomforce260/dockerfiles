@@ -5,7 +5,7 @@ networks:
 services:
     converse:
         # From ghcr.io/ggml-org/llama.cpp:server-cuda13
-        image: git.lunarflame.dev/docker/apps/llama.cpp:server-cuda13
+        image: ${LF_GIT}/apps/llama.cpp:server-cuda13
         container_name: llama-converse
         restart: unless-stopped
 

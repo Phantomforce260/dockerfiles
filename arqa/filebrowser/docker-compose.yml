@@ -1,7 +1,10 @@
 services:
     filebrowser-init:
+        container_name: filebrowser-init
+        restart: no
+
         # From alpine:latest
-        image: git.lunarflame.dev/docker/linux/alpine:latest
+        image: ${LF_GIT}/linux/alpine:latest
         user: root
         command: >
             sh -c "
@@ -10,7 +13,6 @@ services:
             "
         volumes:
             - ./appdata:/data
-        restart: "no"
 
     filebrowser:
         container_name: filebrowser
@@ -19,11 +21,11 @@ services:
             filebrowser-init:
                 condition: service_completed_successfully
 
-        # From filebrowser/filebrowser
-        image: git.lunarflame.dev/docker/apps/filebrowser:latest
+        # From filebrowser/filebrowser:latest
+        image: ${LF_GIT}/apps/filebrowser:latest
 
         ports:
-            - "8099:80"
+            - 8099:80
 
         volumes:
             - ${BROWSER_ROOT}:/srv

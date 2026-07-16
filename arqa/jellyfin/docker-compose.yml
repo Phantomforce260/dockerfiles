@@ -4,12 +4,12 @@ services:
         restart: unless-stopped
 
         # From jellyfin/jellyfin:latest
-        image: git.lunarflame.dev/docker/apps/jellyfin:latest
+        image: ${LF_GIT}/apps/jellyfin:latest
 
         ports:
             # Discovery Port for Network Devices
-            - "7359:7359/udp"
-            - "8003:8096"
+            - 7359:7359/udp
+            - 8003:8096
 
         environment:
             - JELLYFIN_PublishedServerUrl=https://jellyfin.lunarflame.dev

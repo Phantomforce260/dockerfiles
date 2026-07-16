@@ -16,8 +16,8 @@ services:
         image: ${LF_GIT}/apps/gitea:1.25.2
 
         ports:
-            - "8010:3000"
-            - "2222:2222"
+            - 8010:3000
+            - 2222:2222
         networks:
             - gitea
 

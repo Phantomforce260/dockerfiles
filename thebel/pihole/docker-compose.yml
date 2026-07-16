@@ -7,10 +7,10 @@ services:
         image: ${LF_GIT}/apps/pihole:latest
 
         ports:
-            - "8003:80"
+            - 8003:80
             # DNS Ports
-            - "53:53/tcp"
-            - "53:53/udp"
+            - 53:53/tcp
+            - 53:53/udp
 
         environment:
             TZ: 'EST'

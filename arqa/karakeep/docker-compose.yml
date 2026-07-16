@@ -2,24 +2,27 @@ networks:
     backend:
         driver: bridge
 
+x-common: &network
+    networks:
+        - backend
+    dns:
+        - ${DNS_SERVER}
+
 services:
     karakeep:
         container_name: karakeep
         restart: unless-stopped
 
         # From ghcr.io/karakeep-app/karakeep:release
-        image: git.lunarflame.dev/docker/apps/karakeep:release
+        image: ${LF_GIT}/apps/karakeep:release
         deploy:
             resources:
                 limits:
                     memory: 256M
 
         ports:
-            - "8002:3000"
-        networks:
-            - backend
-        dns:
-            - 192.168.1.6
+            - 8002:3000
+        <<: *network
 
         environment:
             MEILI_ADDR: http://meilisearch:7700
@@ -38,12 +41,9 @@ services:
         restart: unless-stopped
 
         # From gcr.io/zenika-hub/alpine-chrome:124
-        image: git.lunarflame.dev/docker/linux/alpine/chrome:124
+        image: ${LF_GIT}/linux/alpine/chrome:124
 
-        networks:
-            - backend
-        dns:
-            - 192.168.1.6
+        <<: *network
 
         command:
             - --no-sandbox
@@ -59,15 +59,12 @@ services:
         restart: unless-stopped
 
         # From getmeili/meilisearch:v1.41.0
-        image: git.lunarflame.dev/docker/apps/meilisearch:v1.41.0
+        image: ${LF_GIT}/apps/meilisearch:v1.41.0
 
-        networks:
-            - backend
-        dns:
-            - 192.168.1.6
+        <<: *network
 
         environment:
-            MEILI_NO_ANALYTICS: "true"
+            MEILI_NO_ANALYTICS: true
         env_file:
             - .env
 

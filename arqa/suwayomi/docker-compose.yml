@@ -4,14 +4,14 @@ services:
         restart: unless-stopped
 
         # From ghcr.io/suwayomi/suwayomi-server:latest
-        image: git.lunarflame.dev/docker/apps/suwayomi/server:latest
+        image: ${LF_GIT}/apps/suwayomi/server:latest
         deploy:
             resources:
                 limits:
                     memory: 384M
 
         ports:
-            - "8005:5000"
+            - 8005:5000
 
         environment:
             - AUTH_MODE=ui_login
@@ -30,7 +30,7 @@ services:
         restart: unless-stopped
 
         # From ghcr.io/thephaseless/byparr:latest
-        image: git.lunarflame.dev/docker/apps/byparr:latest
+        image: ${LF_GIT}/apps/byparr:latest
         deploy:
             resources:
                 limits:

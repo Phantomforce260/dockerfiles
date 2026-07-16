@@ -22,7 +22,7 @@ services:
         image: ${LF_GIT}/apps/nextcloud:mod
 
         ports:
-            - "8000:80"
+            - 8000:80
 
         <<: *network
 
@@ -32,7 +32,7 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             NEXTCLOUD_TRUSTED_DOMAINS: "${DOMAIN} nextcloud"
-            NEXTCLOUD_PROXY: "true"
+            NEXTCLOUD_PROXY: true
             PHP_OPCACHE_MEMORY_CONSUMPTION: 256
             PHP_OPCACHE_MAX_ACCELERATED_FILES: 100000
             PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
@@ -83,7 +83,7 @@ services:
 
         <<: *network
         ports:
-            - "8001:9980"
+            - 8001:9980
 
         environment:
             - username=${CB_USER}

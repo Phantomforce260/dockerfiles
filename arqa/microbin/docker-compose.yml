@@ -4,16 +4,16 @@ services:
         restart: unless-stopped
 
         # From danielszabo99/microbin:latest
-        image: git.lunarflame.dev/docker/apps/microbin:latest
+        image: ${LF_GIT}/apps/microbin:latest
 
         ports:
-            - "8004:8080"
+            - 8004:8080
 
         environment:
             MICROBIN_PUBLIC_PATH: /
             MICROBIN_DATA_DIR: /app/pasta_data
-            MICROBIN_AUTHENTICATION: "true"
-            MICROBIN_ENABLE_LOGIN: "true"
+            MICROBIN_AUTHENTICATION: true
+            MICROBIN_ENABLE_LOGIN: true
             MICROBIN_ADMIN_USERNAME: ${ADMIN_USER}
             MICROBIN_ADMIN_PASSWORD: ${ADMIN_PASSWD}
 

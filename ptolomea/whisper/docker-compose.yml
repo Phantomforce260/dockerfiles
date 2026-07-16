@@ -7,7 +7,7 @@ services:
         container_name: whisper
         restart: unless-stopped
 
-        image: git.lunarflame.dev/docker/rheia/whisper:latest
+        image: ${LF_GIT}/rheia/whisper:latest
 
         ports:
             - "${WHISPER_PORT}:${WHISPER_PORT}"

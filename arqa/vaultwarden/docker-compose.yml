@@ -4,10 +4,10 @@ services:
         restart: unless-stopped
 
         # From vaultwarden/server:latest
-        image: git.lunarflame.dev/docker/apps/vaultwarden/server:latest
+        image: ${LF_GIT}/apps/vaultwarden/server:latest
 
         ports:
-            - "8006:80"
+            - 8006:80
 
         environment:
             DOMAIN: "https://${DOMAIN}"
@@ -15,4 +15,4 @@ services:
             SIGNUPS_ALLOWED: false
 
         volumes:
-            - ./data/:/data/
+            - ./data:/data

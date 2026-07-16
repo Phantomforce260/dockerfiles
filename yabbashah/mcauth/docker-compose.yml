@@ -6,11 +6,11 @@ services:
     mcauth:
         container_name: mcauth
 
-        image: git.lunarflame.dev/docker/apps/mcauth:latest
+        image: ${LF_GIT}/apps/mcauth:latest
         restart: unless-stopped
 
         ports:
-            - "8080:8080"
+            - 8080:8080
         networks:
             - mc-server
 
