@@ -2,6 +2,12 @@ networks:
     backend:
         driver: bridge
 
+x-common: &network
+    dns:
+        - ${DNS_SERVER}
+    networks:
+        - backend
+
 services:
     nextcloud:
         container_name: nextcloud
@@ -13,14 +19,12 @@ services:
 
         # From nextcloud:latest
         # The :mod tag is a custom image that includes ffmpeg for video encoding
-        image: git.lunarflame.dev/docker/apps/nextcloud:mod
+        image: ${LF_GIT}/apps/nextcloud:mod
 
         ports:
             - "8000:80"
-        dns:
-            - ${DNS_SERVER}
-        networks:
-            - backend
+
+        <<: *network
 
         environment:
             MYSQL_HOST: db
@@ -55,10 +59,9 @@ services:
         restart: unless-stopped
 
         # From mariadb:10.11
-        image: git.lunarflame.dev/docker/base/mariadb:10.11
+        image: ${LF_GIT}/base/mariadb:10.11
 
-        networks:
-            - backend
+        <<: *network
 
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -76,10 +79,9 @@ services:
         restart: unless-stopped
 
         # From collabora/code:latest
-        image: git.lunarflame.dev/docker/apps/collabora/code:latest
+        image: ${LF_GIT}/apps/collabora/code:latest
 
-        dns:
-            - ${DNS_SERVER}
+        <<: *network
         ports:
             - "8001:9980"
 
@@ -98,10 +100,9 @@ services:
         restart: unless-stopped
 
         # From redis:7-alpine
-        image: git.lunarflame.dev/docker/linux/alpine/redis:7
+        image: ${LF_GIT}/linux/alpine/redis:7
 
-        networks:
-            - backend
+        <<: *network
 
         command: redis-server --save 60 1 --loglevel warning
 
