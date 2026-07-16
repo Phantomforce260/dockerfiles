@@ -10,15 +10,27 @@ services:
             - /bin/sh
             - -c
             - |
+              # Install ACL tools
+              apk add --no-cache acl &&
+
+              # Create directories
               mkdir -p \
                   /shares/adri \
                   /shares/javi \
                   /shares/shared &&
-              find /shares -type d -exec chmod 755 {} \; &&
-              find /shares -type f -exec chmod 644 {} \;
+
+              # Set base permissions first
+              find /shares -type d -exec chmod 775 {} \; &&
+              find /shares -type f -exec chmod 664 {} \;
+
+              # Apply ACLs from host files
+              find /shares -type d -exec setfacl -M /tmp/dir.acl {} \; &&
+              find /shares -type f -exec setfacl -M /tmp/file.acl {} \;
 
         volumes:
-            - ${INTERNAL_DIR}:/shares
+            - ${SAMBA_DIR}:/shares
+            - /tmp/file.acl:/tmp/file.acl:ro
+            - /tmp/dir.acl:/tmp/dir.acl:ro
 
     samba:
         container_name: samba
@@ -43,11 +55,10 @@ services:
             -s "adri;/data/adri;${MNT_OPT};adrian"
             -s "javi;/data/javi;${MNT_OPT};javi"
             -s "shared;/data/shared;${MNT_OPT};adrian,javi"
-            -s "minecraft;/data/minecraft;${MNT_OPT};adrian"
             -s "psx;/data/psx;${MNT_OPT};adrian"
 
         volumes:
-            # Internal shares (local to docker-compose.yml directory)
-            - ${INTERNAL_DIR}/adri:/data/adri:z
-            - ${INTERNAL_DIR}/javi:/data/javi:z
-            - ${INTERNAL_DIR}/shared:/data/shared:z
+            - ${SAMBA_DIR}/adri:/data/adri:z
+            - ${SAMBA_DIR}/javi:/data/javi:z
+            - ${SAMBA_DIR}/shared:/data/shared:z
+            - ~/psx:/data/psx:z

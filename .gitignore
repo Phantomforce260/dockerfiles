@@ -38,7 +38,6 @@
 */nextcloud/data
 */nextcloud/mariadb
 */nextcloud/redis
-*/nextcloud/internal
 
 */suwayomi/data
 
