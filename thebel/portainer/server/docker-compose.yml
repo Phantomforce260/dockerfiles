@@ -7,7 +7,7 @@ services:
         security_opt:
             - no-new-privileges:true
         dns:
-            - 192.168.1.6
+            - ${DNS_SERVER}
         ports:
             - "8001:9000"
             - "8000:8000"

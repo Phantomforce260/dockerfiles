@@ -7,10 +7,10 @@ services:
         #image: ghcr.io/phantomforce260/apps/nginx-proxy-manager:latest
 
         # From jc21/nginx-proxy-manager:latest
-        image: git.lunarflame.dev/docker/apps/nginx-proxy-manager:latest
+        image: ${LF_GIT}/apps/nginx-proxy-manager:latest
 
         dns:
-            - 192.168.1.6
+            - ${DNS_SERVER}
         ports:
             - "80:80"
             - "8002:81"
