@@ -1,4 +1,4 @@
-SERVICES = $(shell (find . -maxdepth 2 -name docker-compose.yml -exec dirname {} \;; find ./portainer/server -maxdepth 1 -name docker-compose.yml -exec dirname {} \;) | sed 's|^\./||' | sort -u)
+SERVICES = $(shell find . -maxdepth 2 -name docker-compose.yml -exec dirname {} \; | sed 's|^\./||' | sort)
 
 up:
 	@for d in $(SERVICES); do \
