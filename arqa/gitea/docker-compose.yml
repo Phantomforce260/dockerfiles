@@ -13,7 +13,7 @@ services:
         #image: ghcr.io/phantomforce260/apps/gitea:1.25.2
 
         # From docker.gitea.com/gitea:1.25.2
-        image: git.lunarflame.dev/docker/apps/gitea:1.25.2
+        image: ${LF_GIT}/apps/gitea:1.25.2
 
         ports:
             - "8010:3000"
@@ -50,7 +50,7 @@ services:
         # image: ghcr.io/phantomforce260/base/mysql:8
 
         # From docker.io/library/mysql:8
-        image: git.lunarflame.dev/docker/base/mysql:8
+        image: ${LF_GIT}/base/mysql:8
 
         networks:
             - gitea

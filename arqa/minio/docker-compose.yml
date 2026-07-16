@@ -4,7 +4,7 @@ services:
         restart: unless-stopped
 
         # From minio/minio:latest
-        image: git.lunarflame.dev/docker/apps/minio:latest
+        image: ${LF_GIT}/apps/minio:latest
 
         ports:
             - "8012:9000" # API

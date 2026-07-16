@@ -4,11 +4,13 @@ services:
         restart: unless-stopped
 
         # From ghcr.io/wgdashboard/wgdashboard:latest
-        image: git.lunarflame.dev/docker/apps/wgdashboard:latest
+        image: ${LF_GIT}/apps/wgdashboard:latest
 
         ports:
             - "8004:10086"
             - "51820:51820/udp"
+        dns:
+            - ${DNS_SERVER}
 
         cap_add:
             - NET_ADMIN
