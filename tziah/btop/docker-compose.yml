@@ -1,0 +1,11 @@
+services:
+    btop:
+        image: defnotgustavom/btop
+        stdin_open: true
+        tty: true
+        container_name: btop
+        pid: host
+        network_mode: host
+        privileged: true
+        volumes:
+            - /:/rootfs:ro

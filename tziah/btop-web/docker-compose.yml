@@ -1,0 +1,14 @@
+services:
+    btop:
+        image: bigbeartechworld/big-bear-btop:latest
+        container_name: btop-web
+        restart: unless-stopped
+        privileged: true
+        pid: host
+        network_mode: host
+        ports:
+            - 7681:7681
+        volumes:
+            - /proc:/proc:ro
+            - /sys:/sys:ro
+            - /etc/localtime:/etc/localtime:ro

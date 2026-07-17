@@ -3,8 +3,6 @@
 *.tar
 *.tar.gz
 
-*/testing
-
 # THEBEL ------------------------------------------------------------------
 
 */nginx/data
@@ -51,6 +49,10 @@
 */rxresume/data
 */rxresume/postgres_data
 
+*/samba/adri
+*/samba/javi
+*/samba/shared
+
 # YABBASHAH ---------------------------------------------------------------
 
 */javamc/data
@@ -61,10 +63,6 @@
 # TZIAH -------------------------------------------------------------------
 
 */lazydocker/config
-
-*/samba/adri
-*/samba/javi
-*/samba/shared
 
 # PTOLOMEA ----------------------------------------------------------------
 
