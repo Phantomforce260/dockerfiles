@@ -1,0 +1,15 @@
+services:
+    webtop:
+        # From bigbeartechworld/big-bear-btop:latest
+        image: ${LF_GIT}/apps/webtop:latest
+        container_name: webtop
+        restart: unless-stopped
+        privileged: true
+        pid: host
+        ports:
+            - 7681:7681
+        volumes:
+            - /proc:/proc:ro
+            - /sys:/sys:ro
+            - /etc/localtime:/etc/localtime:ro
+            - ~/.config/btop/btop.conf:/root/.config/btop/btop.conf:ro
