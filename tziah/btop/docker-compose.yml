@@ -1,11 +1,16 @@
 services:
     btop:
-        image: defnotgustavom/btop
+        container_name: btop
+        # From defnotgustavom/btop
+        image: ${LF_GIT}/bin/btop
         stdin_open: true
         tty: true
-        container_name: btop
         pid: host
         network_mode: host
         privileged: true
         volumes:
             - /:/rootfs:ro
+            - ~/.config/btop:/root/.config/btop
+        command:
+            - /.snek/btop
+            - --utf-force
