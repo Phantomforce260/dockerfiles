@@ -1,0 +1,19 @@
+networks:
+    proxy:
+        external: true
+
+services:
+    caddy:
+        # From caddy:2
+        image: ${LF_GIT}/base/caddy:2
+        container_name: caddy
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        networks:
+            - proxy
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - ./data:/data
+            - ./config:/config

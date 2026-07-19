@@ -64,6 +64,15 @@
 
 */lazydocker/config
 
+# MALEBOLGE ---------------------------------------------------------------
+
+*/caddy/data
+*/caddy/config
+*/caddy/Caddyfile
+
+*/registry/auth
+*/registry/data
+
 # PTOLOMEA ----------------------------------------------------------------
 
 */llama/models

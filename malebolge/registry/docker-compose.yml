@@ -1,0 +1,24 @@
+networks:
+    proxy:
+        external: true
+
+services:
+    registry:
+        # From registry:2
+        image: ${LF_GIT}/base/registry:2
+        container_name: registry
+        restart: unless-stopped
+        ports:
+            - 5000:5000
+        networks:
+            - proxy
+        environment:
+            REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+            REGISTRY_STORAGE_DELETE_ENABLED: true
+
+            REGISTRY_AUTH: htpasswd
+            REGISTRY_AUTH_HTPASSWD_REALM: Registry
+            REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+        volumes:
+            - ./data:/var/lib/registry
+            - ./auth:/auth
