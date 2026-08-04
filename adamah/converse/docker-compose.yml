@@ -24,7 +24,7 @@ services:
             - NVIDIA_DRIVER_CAPABILITIES=compute,utility
 
         volumes:
-            - ~/Models:/models
+            - ../models:/models
 
         command: >
             --model /models/${MODEL}/model.gguf

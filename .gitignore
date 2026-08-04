@@ -64,6 +64,18 @@
 
 */lazydocker/config
 
+# ADAMAH ----------------------------------------------------------------
+
+*/llama/models
+*/llama/Project*
+
+*/kyutai/hf_cache
+*/kyutai/voices
+
+*/whisper/hf_cache
+
+*/models
+
 # MALEBOLGE ---------------------------------------------------------------
 
 */caddy/data
@@ -73,12 +85,3 @@
 */registry/auth
 */registry/data
 
-# PTOLOMEA ----------------------------------------------------------------
-
-*/llama/models
-*/llama/Project*
-
-*/kyutai/hf_cache
-*/kyutai/voices
-
-*/whisper/hf_cache

@@ -23,4 +23,4 @@ services:
             --mlock
 
         volumes:
-            - ~/Models:/models
+            - ../models:/models
