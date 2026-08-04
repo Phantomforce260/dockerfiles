@@ -15,10 +15,6 @@ services:
 
         # From ghcr.io/karakeep-app/karakeep:release
         image: ${LF_GIT}/apps/karakeep:release
-        deploy:
-            resources:
-                limits:
-                    memory: 256M
 
         ports:
             - 8002:3000
