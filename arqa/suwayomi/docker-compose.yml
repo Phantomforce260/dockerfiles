@@ -5,10 +5,6 @@ services:
 
         # From ghcr.io/suwayomi/suwayomi-server:latest
         image: ${LF_GIT}/apps/suwayomi/server:latest
-        deploy:
-            resources:
-                limits:
-                    memory: 384M
 
         ports:
             - 8005:5000
@@ -31,10 +27,6 @@ services:
 
         # From ghcr.io/thephaseless/byparr:latest
         image: ${LF_GIT}/apps/byparr:latest
-        deploy:
-            resources:
-                limits:
-                    memory: 128M
 
         init: true
         environment:
