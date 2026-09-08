@@ -1,0 +1,21 @@
+services:
+    lazygit:
+        image: ${LF_GIT}/bin/lazygit:latest
+        container_name: lazygit
+        stdin_open: true
+        tty: true
+        working_dir: /repo
+        environment:
+            - TERM=${TERM:-xterm-256color}
+
+            # Marks /repo as safe regardless of what's in the mounted ~/.gitconfig,
+            # since env-based git config always wins over file-based config.
+            - GIT_CONFIG_COUNT=1
+            - GIT_CONFIG_KEY_0=safe.directory
+            - GIT_CONFIG_VALUE_0=/repo
+        volumes:
+            - .:/repo
+            - ${HOME}/.gitconfig:/root/.gitconfig:ro
+            - ${HOME}/.ssh:/root/.ssh:ro
+            - ${HOME}/.config/lazygit/config.yml:/root/.config/lazygit/config.yml:ro
+
