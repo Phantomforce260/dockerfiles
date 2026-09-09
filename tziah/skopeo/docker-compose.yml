@@ -1,0 +1,8 @@
+services:
+    skopeo:
+        # From quay.io/skopeo/stable:latest
+        image: ${LF_GIT}/bin/skopeo:latest
+        container_name: skopeo
+        entrypoint: ["skopeo"]
+        volumes:
+          - ~/.docker/config.json:/tmp/auth.json:ro

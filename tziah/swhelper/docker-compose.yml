@@ -16,3 +16,4 @@ services:
             - ./data/helper:/app/data/helper
             # Suwayomi data dir, shared with the suwayomi server container.
             - ./data/suwayomi:/app/data/suwayomi
+            #- ${HDD_MNTS}/suwayomi:/app/data/suwayomi

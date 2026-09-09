@@ -1,0 +1,7 @@
+services:
+    imagemagick:
+        # From dpokidov/imagemagick
+        image: ${LF_GIT}/bin/imagemagick:latest
+        container_name: imagemagick
+        working_dir: /imgs
+        # Volume is added dynamically at call-time by the bashrc functions, so this file has none by default.
