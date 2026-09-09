@@ -16,4 +16,4 @@ services:
         command: server /data --console-address ":9001"
 
         volumes:
-            - ~/psx/necronomicon/minio:/data
+            - ${HDD_MNTS}/minio:/data

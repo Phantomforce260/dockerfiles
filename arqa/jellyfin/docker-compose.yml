@@ -18,6 +18,6 @@ services:
             - ./config:/config
             - ./cache:/cache
             - type: bind
-              source: ~/psx/necronomicon/jellyfin
+              source: ${HDD_MNTS}/jellyfin
               target: /media
 

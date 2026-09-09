@@ -61,4 +61,4 @@ services:
             - ${SAMBA_DIR}/adri:/data/adri:z
             - ${SAMBA_DIR}/javi:/data/javi:z
             - ${SAMBA_DIR}/shared:/data/shared:z
-            - ~/psx:/data/psx:z
+            - ${PSX}:/data/psx:z

@@ -52,7 +52,7 @@ services:
 
             # Samba-backed data (host mounts)
             - ${SAMBA_DIR}:/mnt/smb:rw
-            - /mnt/psx:/mnt/psx:rw
+            - ${PSX}:/mnt/psx:rw
 
     db:
         container_name: nextcloud-db

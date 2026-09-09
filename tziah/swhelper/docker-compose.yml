@@ -1,0 +1,18 @@
+services:
+    helper:
+        container_name: suwayomi-helper
+        restart: unless-stopped
+
+        image: ${LF_GIT}/apps/suwayomi/helper:latest
+
+        # Provides SCRAPER=WebScraperV1; add other env vars here.
+        env_file:
+            - .env
+
+        volumes:
+            # Scraper sources (WebScraperV1.kt), recompiled at runtime from the mounted volume.
+            - ./data/api:/app/data/api
+            # Manifest (localSource.json) and MangaDex id overrides (.mangadex_ids.json).
+            - ./data/helper:/app/data/helper
+            # Suwayomi data dir, shared with the suwayomi server container.
+            - ./data/suwayomi:/app/data/suwayomi
