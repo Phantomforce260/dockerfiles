@@ -19,4 +19,6 @@ RUN set -eux; \
 
 WORKDIR /repo
 
-ENTRYPOINT ["lazygit"]
+# Host files are owned by the host user, but the container runs as root, which OpenSSH rejects. Copy them
+# into a fresh /root/.ssh owned by root with correct permissions at runtime.
+ENTRYPOINT ["sh", "-c", "if [ -d /ssh ]; then rm -rf /root/.ssh; mkdir -p /root/.ssh; cp -r /ssh/. /root/.ssh/; chown -R root:root /root/.ssh; find /root/.ssh -type f -exec chmod 600 {} +; find /root/.ssh -type d -exec chmod 700 {} +; fi; exec lazygit \"$@\"", "lazygit"]

@@ -16,6 +16,6 @@ services:
         volumes:
             - .:/repo
             - ${HOME}/.gitconfig:/root/.gitconfig:ro
-            - ${HOME}/.ssh:/root/.ssh:ro
+            - ${HOME}/.ssh:/ssh:ro
             - ${HOME}/.config/lazygit/config.yml:/root/.config/lazygit/config.yml:ro
 
