@@ -37,8 +37,8 @@
 */nextcloud/mariadb
 */nextcloud/redis
 
-*/suwayomi/data
-*/swhelper/data
+*/suwayomi/server/data
+*/suwayomi/helper/data
 
 */vaultwarden/data
 */vaultwarden/master.txt

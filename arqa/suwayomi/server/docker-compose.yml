@@ -19,7 +19,7 @@ services:
             - BIND_PORT=5000
             - JAVA_TOOL_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED
         volumes:
-            - ${DATA_DIR}:/home/suwayomi/.local/share/Tachidesk
+            - ${HDD_MNTS}/suwayomi:/home/suwayomi/.local/share/Tachidesk
 
     byparr:
         container_name: suwayomi-byparr
