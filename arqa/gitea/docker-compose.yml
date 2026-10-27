@@ -38,7 +38,7 @@ services:
             - GITEA__service__REQUIRE_SIGNIN_VIEW=true
 
         volumes:
-            - ./data:/data
+            - ${HDD_MNTS}/gitea/data:/data
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
 
