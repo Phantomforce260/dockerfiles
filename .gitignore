@@ -15,6 +15,9 @@
 */wireguard/conf
 */wireguard/data
 
+*/smokeping/data
+*/smokeping/config
+
 */portainer/server/data
 
 # ARQA --------------------------------------------------------------------
