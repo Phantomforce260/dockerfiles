@@ -3,7 +3,8 @@ services:
         container_name: smokeping
         restart: unless-stopped
 
-        image: lscr.io/linuxserver/smokeping:latest
+        # From lscr.io/linuxserver/smokeping:latest
+        image: ${LF_GIT}/apps/smokeping:latest
         hostname: smokeping
         environment:
             - PUID=1000
