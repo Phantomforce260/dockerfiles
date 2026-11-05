@@ -48,6 +48,12 @@
 */jellyfin/config
 */jellyfin/cache
 
+*/romm/assets
+*/romm/config
+*/romm/romm_db_data
+*/romm/romm_resources
+*/romm/romm_valkey_data
+
 */rxresume/data
 */rxresume/postgres_data
 

@@ -1,0 +1,55 @@
+services:
+    romm:
+        # From rommapp/romm:latest
+        image: ${LF_GIT}/apps/romm:latest
+        container_name: romm
+        restart: unless-stopped
+        ports:
+            - "8004:8080"
+        environment:
+            - DB_HOST=romm-db
+            - DB_NAME=romm
+            - DB_USER=romm_user
+            - DB_PASSWD=${DB_PASSWD}
+            - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET_KEY}
+            
+            # Metadata Provider API Keys
+            - IGDB_CLIENT_ID=${IGDB_CLIENT_ID}
+            - IGDB_CLIENT_SECRET={IGDB_CLIENT_SECRET}
+        volumes:
+            - ./romm_resources:/romm/resources
+            - ${LF_GIT}/romm/roms:/romm/library
+            - ./assets:/romm/assets
+            - ./config:/romm/config
+        depends_on:
+            romm-db:
+                condition: service_healthy
+            romm-valkey:
+                condition: service_started
+
+    romm-db:
+      # From mariadb:10.11
+        image: ${LF_GIT}/base/mariadb:10.11
+        container_name: romm-db
+        restart: unless-stopped
+        environment:
+            - MARIADB_ROOT_PASSWORD=${DB_PASSWD}
+            - MARIADB_DATABASE=romm
+            - MARIADB_USER=romm_user
+            - MARIADB_PASSWORD=${DB_PASSWD}
+        volumes:
+            - ./romm_db_data:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+            interval: 10s
+            timeout: 5s
+            retries: 3
+            start_period: 30s
+
+    romm-valkey:
+        # From valkey/valkey:latest
+        image: ${LF_GIT}/base/valkey:latest
+        container_name: romm-valkey
+        restart: unless-stopped
+        volumes:
+            - ./romm_valkey_data:/data
