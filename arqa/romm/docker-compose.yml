@@ -15,10 +15,10 @@ services:
             
             # Metadata Provider API Keys
             - IGDB_CLIENT_ID=${IGDB_CLIENT_ID}
-            - IGDB_CLIENT_SECRET={IGDB_CLIENT_SECRET}
+            - IGDB_CLIENT_SECRET=${IGDB_CLIENT_SECRET}
         volumes:
             - ./romm_resources:/romm/resources
-            - ${LF_GIT}/romm/roms:/romm/library
+            - ${HDD_MNTS}/romm/roms:/romm/library
             - ./assets:/romm/assets
             - ./config:/romm/config
         depends_on:
