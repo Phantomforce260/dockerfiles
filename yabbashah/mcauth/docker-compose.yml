@@ -22,6 +22,3 @@ services:
             # Do not make a new password!
             RCON_PASSWORD: ${RCON_PASSWORD}
             SERVER_LINK: ${SERVER_LINK}
-
-        volumes:
-            - ../javamc/data:/app/data
