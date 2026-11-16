@@ -17,8 +17,14 @@ services:
         environment:
             ADMIN_USERNAME: ${ADMIN_USERNAME}
             ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+            ADMIN_TOKEN: ${ADMIN_TOKEN}
             RCON_HOST: javamc
             # This must be the password from your existing minecraft RCON session.
             # Do not make a new password!
             RCON_PASSWORD: ${RCON_PASSWORD}
             SERVER_LINK: ${SERVER_LINK}
+            SAMPLE_INTERVAL_MINUTES: 5
+            SAMPLE_RETENTION_DAYS: 30
+            DATA_DIR: /data
+        volumes:
+          - ./mcauth-data:/data
